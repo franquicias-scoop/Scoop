@@ -284,8 +284,7 @@ var mktCat = 'all';
 var openCards = {};
 
 // Firebase refs (set after init)
-var FC_REF, MKT_REF, CTY_REF;
-var firestoreSetDoc, firestoreOnSnapshot;
+// Firebase refs are set via window.FC_REF etc by the module script
 
 // ── LOGIN ──
 document.getElementById('loginBtn').addEventListener('click', doLogin);
@@ -330,15 +329,15 @@ function setSynced(){ $('syncDot').className='sync-dot'; $('syncLabel').textCont
 // ── SAVE ──
 function saveFC(){
   setSyncing();
-  firestoreSetDoc(FC_REF, {data:JSON.stringify(franchises)}).then(setSynced).catch(function(){ $('syncLabel').textContent='Error'; });
+  window.firestoreSetDoc(window.FC_REF, {data:JSON.stringify(franchises)}).then(setSynced).catch(function(){ $('syncLabel').textContent='Error'; });
 }
 function saveMKT(){
   setSyncing();
-  firestoreSetDoc(MKT_REF, {data:JSON.stringify(mktData)}).then(setSynced).catch(function(){ $('syncLabel').textContent='Error'; });
+  window.firestoreSetDoc(window.MKT_REF, {data:JSON.stringify(mktData)}).then(setSynced).catch(function(){ $('syncLabel').textContent='Error'; });
 }
 function saveCTY(){
   setSyncing();
-  firestoreSetDoc(CTY_REF, {data:JSON.stringify(cities)}).then(setSynced).catch(function(){ $('syncLabel').textContent='Error'; });
+  window.firestoreSetDoc(window.CTY_REF, {data:JSON.stringify(cities)}).then(setSynced).catch(function(){ $('syncLabel').textContent='Error'; });
 }
 
 // ── SIDEBAR ──
@@ -649,10 +648,7 @@ function initFirebase(){
     window.FC_REF = doc(db,'workspace','franchises');
     window.MKT_REF = doc(db,'workspace','marketing');
     window.CTY_REF = doc(db,'workspace','cities');
-    FC_REF = window.FC_REF;
-    MKT_REF = window.MKT_REF;
-    CTY_REF = window.CTY_REF;
-    firestoreSetDoc = setDoc;
+    window.firestoreSetDoc = setDoc;
 
     async function loadAll(){
       try{
