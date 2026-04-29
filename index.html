@@ -215,6 +215,19 @@ body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(
 .loading-fill{height:100%;width:0;background:var(--red);border-radius:2px;animation:load 1.5s ease forwards}
 @keyframes load{to{width:100%}}
 
+/* LOGIN */
+.login-overlay{position:fixed;inset:0;background:var(--cream);display:flex;align-items:center;justify-content:center;z-index:998;flex-direction:column;gap:0}
+.login-box{background:var(--white);border-radius:24px;padding:40px 36px;width:360px;max-width:92vw;box-shadow:var(--shadow-lg);text-align:center;animation:up 0.3s ease}
+.login-logo{font-family:'Playfair Display',serif;font-size:48px;color:var(--red);font-style:italic;margin-bottom:6px}
+.login-sub{font-size:12px;color:var(--text-light);letter-spacing:2px;text-transform:uppercase;margin-bottom:32px}
+.login-label{font-size:11px;font-weight:700;color:var(--text-mid);letter-spacing:1px;text-transform:uppercase;text-align:left;display:block;margin-bottom:6px}
+.login-input{width:100%;padding:12px 16px;border:1.5px solid var(--cream-dark);border-radius:var(--r-sm);font-size:15px;font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);outline:none;transition:border-color 0.15s;text-align:center;letter-spacing:3px;margin-bottom:16px}
+.login-input:focus{border-color:var(--red);background:white}
+.login-btn{width:100%;background:var(--red);color:white;border:none;padding:13px;border-radius:50px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.18s;letter-spacing:0.5px}
+.login-btn:hover{background:var(--red-light);transform:translateY(-1px);box-shadow:0 4px 16px rgba(200,16,46,0.3)}
+.login-error{font-size:12px;color:var(--red);margin-top:10px;display:none;font-weight:500}
+.login-error.show{display:block}
+
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--cream)}
 ::-webkit-scrollbar-thumb{background:var(--cream-dark);border-radius:3px}
@@ -222,7 +235,19 @@ body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(
 </head>
 <body>
 
-<div class="loading-overlay" id="loader">
+<!-- LOGIN -->
+<div class="login-overlay" id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">Scoop</div>
+    <div class="login-sub">Workspace Interno</div>
+    <label class="login-label">Contraseña</label>
+    <input class="login-input" type="password" id="loginInput" placeholder="••••••••••" onkeydown="if(event.key==='Enter')checkLogin()">
+    <button class="login-btn" onclick="checkLogin()">Entrar</button>
+    <div class="login-error" id="loginError">Contraseña incorrecta. Inténtalo de nuevo.</div>
+  </div>
+</div>
+
+<div class="loading-overlay" id="loader" style="display:none;">
   <div class="loading-logo">Scoop</div>
   <div style="font-size:11px;color:var(--text-light);letter-spacing:2px;text-transform:uppercase">Cargando workspace...</div>
   <div class="loading-bar"><div class="loading-fill"></div></div>
@@ -681,7 +706,28 @@ window.addMktTask=function(){
 }
 document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeModals();}));
 
-init();
+// LOGIN
+const PASSWORD = "KiraBueno401";
+window.checkLogin = function(){
+  const val = document.getElementById("loginInput").value;
+  if(val === PASSWORD){
+    sessionStorage.setItem("scoop_auth","1");
+    document.getElementById("loginScreen").style.display="none";
+    document.getElementById("loader").style.display="flex";
+    init();
+  } else {
+    document.getElementById("loginError").classList.add("show");
+    document.getElementById("loginInput").value="";
+    document.getElementById("loginInput").focus();
+  }
+};
+
+// Check if already logged in
+if(sessionStorage.getItem("scoop_auth")==="1"){
+  document.getElementById("loginScreen").style.display="none";
+  document.getElementById("loader").style.display="flex";
+  init();
+}
 </script>
 </body>
 </html>
