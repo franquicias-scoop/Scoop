@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Scoop Workspace</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
 :root{--cream:#F7F0E8;--cream-dark:#EDE4D8;--red:#C8102E;--red-light:#E8304A;--red-pale:#FDEDF0;--text:#2C1810;--text-mid:#6B4C3B;--text-light:#A08070;--white:#FFFFFF;--shadow:0 2px 16px rgba(44,24,16,0.07);--shadow-md:0 6px 28px rgba(44,24,16,0.11);--shadow-lg:0 16px 56px rgba(44,24,16,0.15);--r:14px;--r-sm:9px}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -26,31 +26,27 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .header{background:var(--white);border-bottom:1px solid var(--cream-dark);padding:0 20px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 1px 12px rgba(44,24,16,0.06)}
 .logo{font-family:'Playfair Display',serif;font-size:24px;color:var(--red);font-style:italic}
 .nav-tabs{display:flex;gap:4px}
-.nav-tab{padding:7px 14px;border-radius:50px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--text-light);font-family:'DM Sans',sans-serif;transition:all 0.18s}
-.nav-tab:hover{color:var(--text);background:var(--cream)}
+.nav-tab{padding:7px 14px;border-radius:50px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--text-light);font-family:'DM Sans',sans-serif}
 .nav-tab.active{background:var(--red);color:white}
 .sync-status{font-size:11px;color:var(--text-light);display:flex;align-items:center;gap:5px}
 .sync-dot{width:7px;height:7px;border-radius:50%;background:#4CAF50;flex-shrink:0}
 .sync-dot.syncing{background:#FF9800;animation:pulse 1s infinite}
-.sync-dot.err{background:var(--red)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
 .app{display:flex;min-height:calc(100vh - 58px)}
 .sidebar{width:220px;flex-shrink:0;background:var(--white);border-right:1px solid var(--cream-dark);padding:16px 0;overflow-y:auto}
 .content{flex:1;padding:22px 24px;overflow-y:auto;min-width:0}
 @media(max-width:768px){.sidebar{display:none}.content{padding:16px}}
 .slabel{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);padding:10px 18px 4px}
-.sitem{display:flex;align-items:center;gap:8px;padding:8px 18px;font-size:13px;font-weight:500;color:var(--text-mid);cursor:pointer;transition:all 0.15s;border-left:3px solid transparent}
+.sitem{display:flex;align-items:center;gap:8px;padding:8px 18px;font-size:13px;font-weight:500;color:var(--text-mid);cursor:pointer;border-left:3px solid transparent}
 .sitem:hover{background:var(--cream);color:var(--text)}
 .sitem.active{background:var(--red-pale);color:var(--red);font-weight:600;border-left-color:var(--red)}
 .scnt{margin-left:auto;font-size:10px;background:var(--cream-dark);padding:2px 7px;border-radius:20px;color:var(--text-mid);font-weight:600}
 .scnt.hot{background:var(--red);color:white}
 .sdiv{border:none;border-top:1px solid var(--cream-dark);margin:10px 0}
 .view{display:none}.view.active{display:block}
-.btn{border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;transition:all 0.18s;border-radius:50px}
+.btn{border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;border-radius:50px}
 .btn-red{background:var(--red);color:white;padding:9px 18px;font-size:13px}
-.btn-red:hover{background:var(--red-light)}
 .btn-ghost{background:transparent;color:var(--text-mid);border:1.5px solid var(--cream-dark);padding:8px 14px;font-size:13px}
-.btn-ghost:hover{border-color:var(--red);color:var(--red)}
 .btn-sm{padding:5px 10px;font-size:11px}
 .page-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
 .page-title{font-family:'Playfair Display',serif;font-size:28px}
@@ -60,69 +56,62 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .stat-n{font-family:'Playfair Display',serif;font-size:28px;color:var(--red);line-height:1}
 .stat-l{font-size:10px;color:var(--text-light);font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-top:3px}
 .fc-list{display:flex;flex-direction:column;gap:12px}
-.fc{background:var(--white);border-radius:var(--r);box-shadow:var(--shadow);border:1.5px solid transparent;overflow:hidden;transition:all 0.18s}
-.fc:hover{border-color:var(--cream-dark);box-shadow:var(--shadow-md)}
-.fc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer}
+.fc{background:var(--white);border-radius:var(--r);box-shadow:var(--shadow);border:1.5px solid transparent;overflow:hidden}
+.fc-head{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none;-webkit-user-select:none}
 .fc-av{width:38px;height:38px;border-radius:50%;background:var(--red);color:white;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:15px;font-weight:600;flex-shrink:0}
-.fc-info{flex:1;min-width:0}
+.fc-info{flex:1;min-width:0;pointer-events:none}
 .fc-name{font-weight:600;font-size:14px}
 .fc-city{font-size:12px;color:var(--text-light);margin-top:1px}
-.fc-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.fc-right{display:flex;align-items:center;gap:8px;flex-shrink:0;pointer-events:none}
 .spill{padding:4px 10px;border-radius:50px;font-size:10px;font-weight:700}
 .sP{background:#FFF3CD;color:#856404}.sN{background:#FFE4B5;color:#7D5A00}.sF{background:#D4EDDA;color:#155724}.sPre{background:#CCE5FF;color:#004085}.sA{background:#D1ECF1;color:#0C5460}
 .prog-wrap{display:flex;flex-direction:column;align-items:center;gap:2px}
 .prog-bar{width:70px;height:4px;background:var(--cream-dark);border-radius:2px;overflow:hidden}
-.prog-fill{height:100%;background:var(--red);border-radius:2px;transition:width 0.3s}
+.prog-fill{height:100%;background:var(--red);border-radius:2px}
 .prog-txt{font-size:10px;color:var(--text-light);font-weight:500}
 .chev{font-size:11px;color:var(--text-light);transition:transform 0.2s;flex-shrink:0}
 .chev.open{transform:rotate(180deg)}
 .fc-detail{display:none;border-top:1px solid var(--cream-dark)}
 .fc-detail.open{display:block}
 .pipe-bar{display:flex;background:var(--cream)}
-.pipe-step{flex:1;padding:8px 4px;text-align:center;font-size:9px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-light);cursor:pointer;border-right:1px solid var(--cream-dark);transition:all 0.15s}
+.pipe-step{flex:1;padding:8px 4px;text-align:center;font-size:9px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--text-light);cursor:pointer;border-right:1px solid var(--cream-dark)}
 .pipe-step:last-child{border-right:none}
-.pipe-step:hover{background:var(--cream-dark)}
 .pipe-step.done{background:var(--red);color:white}
 .pipe-step.cur{background:var(--red-pale);color:var(--red);box-shadow:inset 0 -3px 0 var(--red)}
 .cl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;padding:16px}
 .cl-sec{background:var(--cream);border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--cream-dark)}
 .cl-hd{padding:9px 12px;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:white}
 .hP{background:#8B6F5E}.hN{background:#C8910E}.hF{background:#2D7A4A}.hPre{background:#1A6BAA}.hA{background:#5A2D8A}
-.cl-item{display:flex;align-items:flex-start;gap:8px;padding:8px 12px;border-bottom:1px solid var(--cream-dark);background:white;transition:background 0.12s}
+.cl-item{display:flex;align-items:flex-start;gap:8px;padding:8px 12px;border-bottom:1px solid var(--cream-dark);background:white}
 .cl-item:last-child{border-bottom:none}
-.cl-item:hover{background:#fffaf8}
-.chk{width:16px;height:16px;border:2px solid var(--cream-dark);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all 0.15s;margin-top:1px}
+.chk{width:16px;height:16px;border:2px solid var(--cream-dark);border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;margin-top:1px}
 .chk.on{background:var(--red);border-color:var(--red);color:white}
-.chk:hover:not(.on){border-color:var(--red)}
 .cl-lbl{flex:1;font-size:12px;line-height:1.4}
 .cl-lbl.done{text-decoration:line-through;color:var(--text-light)}
 .folio-row{display:flex;align-items:center;gap:4px;margin-top:4px}
 .folio-lbl{font-size:9px;color:var(--text-light);font-weight:600;text-transform:uppercase}
 .folio-in{font-size:11px;padding:2px 6px;border:1px solid var(--cream-dark);border-radius:4px;background:var(--cream);color:var(--text-mid);width:95px;outline:none;font-family:'DM Sans',sans-serif}
-.folio-in:focus{border-color:var(--red)}
 .fc-notes{padding:12px 16px;border-top:1px solid var(--cream-dark);background:white;display:flex;gap:8px;align-items:flex-start}
 .notes-ta{flex:1;padding:8px 11px;border:1.5px solid var(--cream-dark);border-radius:var(--r-sm);font-size:12px;font-family:'DM Sans',sans-serif;resize:none;height:56px;outline:none;color:var(--text)}
-.notes-ta:focus{border-color:var(--red)}
 .ptabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
-.ptab{padding:6px 14px;border-radius:50px;font-size:12px;font-weight:600;border:1.5px solid var(--cream-dark);background:white;color:var(--text-mid);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s}
-.ptab:hover{border-color:var(--red);color:var(--red)}
+.ptab{padding:6px 14px;border-radius:50px;font-size:12px;font-weight:600;border:1.5px solid var(--cream-dark);background:white;color:var(--text-mid);cursor:pointer;font-family:'DM Sans',sans-serif}
 .ptab.active{background:var(--red);border-color:var(--red);color:white}
 .mkt-board{display:flex;flex-direction:column;gap:12px}
 .mgrp{background:white;border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;border:1.5px solid var(--cream-dark)}
-.mgrp-hd{display:flex;align-items:center;gap:10px;padding:13px 16px;cursor:pointer;border-bottom:1px solid var(--cream-dark);background:var(--cream)}
-.mgrp-title{font-weight:700;font-size:14px;flex:1}
-.mgrp-meta{display:flex;align-items:center;gap:8px}
+.mgrp-hd{display:flex;align-items:center;gap:10px;padding:13px 16px;cursor:pointer;border-bottom:1px solid var(--cream-dark);background:var(--cream);user-select:none;-webkit-user-select:none}
+.mgrp-title{font-weight:700;font-size:14px;flex:1;pointer-events:none}
+.mgrp-meta{display:flex;align-items:center;gap:8px;pointer-events:none}
 .mcat{padding:3px 9px;border-radius:50px;font-size:10px;font-weight:700}
 .redes{background:#FFE4F0;color:#9B1B5A}.video{background:#E4F0FF;color:#1B5A9B}.diseno{background:#FFF4E4;color:#9B6A1B}.campana{background:#E4FFE9;color:#1B7A2A}.general{background:var(--cream-dark);color:var(--text-mid)}
 .mprog{display:flex;align-items:center;gap:5px}
 .mprog-bar{width:50px;height:4px;background:var(--cream-dark);border-radius:2px;overflow:hidden}
 .mprog-fill{height:100%;background:var(--red)}
 .mprog-txt{font-size:10px;color:var(--text-light);font-weight:500}
-.mchev{color:var(--text-light);font-size:11px;transition:transform 0.2s}
+.mchev{color:var(--text-light);font-size:11px;transition:transform 0.2s;pointer-events:none}
 .mchev.open{transform:rotate(180deg)}
 .mtasks{display:none}.mtasks.open{display:block}
-.mtask{display:flex;align-items:flex-start;gap:9px;padding:10px 16px;border-bottom:1px solid var(--cream);transition:background 0.12s}
-.mtask:last-child{border-bottom:none}.mtask:hover{background:var(--cream)}
+.mtask{display:flex;align-items:flex-start;gap:9px;padding:10px 16px;border-bottom:1px solid var(--cream)}
+.mtask:last-child{border-bottom:none}
 .mtask-body{flex:1}
 .mtask-txt{font-size:13px;line-height:1.45}
 .mtask-txt.done{text-decoration:line-through;color:var(--text-light)}
@@ -132,12 +121,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .pdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
 .palta{background:var(--red)}.pmedia{background:#FF9800}.pbaja{background:#4CAF50}
 .tdate{font-size:10px;color:var(--text-light);background:var(--cream);border-radius:20px;padding:2px 7px;border:1px solid var(--cream-dark)}
-.subtask{padding-left:32px}
 .madd{display:flex;gap:7px;padding:9px 16px;background:var(--cream);border-top:1px solid var(--cream-dark);flex-wrap:wrap}
 .madd-in{flex:1;min-width:160px;padding:7px 11px;border:1.5px solid var(--cream-dark);border-radius:var(--r-sm);font-size:13px;font-family:'DM Sans',sans-serif;background:white;outline:none;color:var(--text)}
-.madd-in:focus{border-color:var(--red)}
 .madd-sel{padding:7px 8px;border:1.5px solid var(--cream-dark);border-radius:var(--r-sm);font-size:11px;font-family:'DM Sans',sans-serif;background:white;color:var(--text-mid);cursor:pointer;outline:none}
-.overlay{display:none;position:fixed;inset:0;background:rgba(44,24,16,0.45);z-index:300;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(44,24,16,0.45);z-index:300;align-items:center;justify-content:center}
 .overlay.open{display:flex}
 .modal{background:white;border-radius:18px;padding:26px;width:460px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
 .modal-title{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:5px}
@@ -146,13 +133,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .form-row.full{grid-template-columns:1fr}
 .form-g{display:flex;flex-direction:column;gap:4px}
 .form-l{font-size:10px;font-weight:700;color:var(--text-mid);letter-spacing:1px;text-transform:uppercase}
-.form-in{padding:9px 11px;border:1.5px solid var(--cream-dark);border-radius:var(--r-sm);font-size:13px;font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);outline:none;transition:border-color 0.15s;width:100%}
+.form-in{padding:9px 11px;border:1.5px solid var(--cream-dark);border-radius:var(--r-sm);font-size:13px;font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);outline:none;width:100%}
 .form-in:focus{border-color:var(--red);background:white}
 .modal-foot{display:flex;gap:9px;justify-content:flex-end;margin-top:18px;padding-top:14px;border-top:1px solid var(--cream-dark)}
 .toolbar{display:flex;gap:10px;margin-bottom:16px}
 .srch{position:relative}
 .srch input{padding:8px 13px 8px 34px;border:1.5px solid var(--cream-dark);border-radius:50px;font-size:13px;font-family:'DM Sans',sans-serif;background:white;color:var(--text);outline:none;width:240px}
-.srch input:focus{border-color:var(--red)}
 .srch-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--text-light);pointer-events:none}
 .empty{text-align:center;padding:48px 20px}
 .empty-icon{font-size:40px;opacity:0.4;margin-bottom:12px}
@@ -250,18 +236,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
     <div class="form-row">
       <div class="form-g"><label class="form-l">Categoría</label>
         <select class="form-in" id="mktCat">
-          <option value="redes">📱 Redes Sociales</option>
-          <option value="video">🎬 Video</option>
-          <option value="diseno">🎨 Diseño</option>
-          <option value="campana">📣 Campaña</option>
-          <option value="general">📋 General</option>
+          <option value="redes">📱 Redes Sociales</option><option value="video">🎬 Video</option>
+          <option value="diseno">🎨 Diseño</option><option value="campana">📣 Campaña</option><option value="general">📋 General</option>
         </select>
       </div>
       <div class="form-g"><label class="form-l">Asignado a</label>
         <select class="form-in" id="mktAssign">
-          <option value="ale">Ale (Marketing)</option>
-          <option value="ana">Ana (Franquicias)</option>
-          <option value="ambas">Ambas</option>
+          <option value="ale">Ale (Marketing)</option><option value="ana">Ana (Franquicias)</option><option value="ambas">Ambas</option>
         </select>
       </div>
     </div>
@@ -278,50 +259,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
   </div>
 </div>
 
-<!-- LOGIN SCRIPT (normal, not module) -->
 <script>
+// ── CONSTANTS ──
 var PASSWORD = "KiraBueno401";
-function doLogin(){
-  var val = document.getElementById('loginInput').value;
-  if(val === PASSWORD){
-    sessionStorage.setItem('scoop_ok','1');
-    document.getElementById('loginScreen').style.display='none';
-    document.getElementById('loader').style.display='flex';
-    if(window.startApp) window.startApp();
-  } else {
-    document.getElementById('loginError').style.display='block';
-    document.getElementById('loginInput').value='';
-    document.getElementById('loginInput').focus();
-  }
-}
-document.getElementById('loginBtn').addEventListener('click', doLogin);
-document.getElementById('loginInput').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
-if(sessionStorage.getItem('scoop_ok')==='1'){
-  document.getElementById('loginScreen').style.display='none';
-  document.getElementById('loader').style.display='flex';
-}
-</script>
 
-<!-- FIREBASE MODULE SCRIPT -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-
-const app = initializeApp({
-  apiKey:"AIzaSyCxjl39lsYyQMVNPPjdPn1dIr5uv47YjsU",
-  authDomain:"scoop-frozen-yogurt.firebaseapp.com",
-  projectId:"scoop-frozen-yogurt",
-  storageBucket:"scoop-frozen-yogurt.firebasestorage.app",
-  messagingSenderId:"880756018979",
-  appId:"1:880756018979:web:e2536756a63f1b7ee18696"
-});
-const db = getFirestore(app);
-const FC = doc(db,'workspace','franchises');
-const MKT = doc(db,'workspace','marketing');
-const CTY = doc(db,'workspace','cities');
-
-const STAGES=['Prospecto','Negociación','Firma','Pre-Apertura','Abierta'];
-const CL={
+var STAGES = ['Prospecto','Negociación','Firma','Pre-Apertura','Abierta'];
+var CL = {
   'Prospecto':[{id:'p1',label:'Primer contacto realizado'},{id:'p2',label:'Zoom de presentación agendado'},{id:'p3',label:'Zoom de presentación realizado'},{id:'p4',label:'Deck de franquicias enviado'},{id:'p5',label:'Preguntas frecuentes resueltas'}],
   'Negociación':[{id:'n1',label:'Reunión de negociación agendada'},{id:'n2',label:'Reunión de negociación realizada'},{id:'n3',label:'COF enviado al prospecto'},{id:'n4',label:'COF firmado por el prospecto',folio:'COF'},{id:'n5',label:'Pago de licencia confirmado ($350,000 MXN)'}],
   'Firma':[{id:'f1',label:'Contrato elaborado'},{id:'f2',label:'Contrato enviado'},{id:'f3',label:'Contrato firmado por ambas partes',folio:'CONTRATO'},{id:'f4',label:'Fee de publicidad configurado ($5,000/mes)'},{id:'f5',label:'Acceso a sistemas otorgado'}],
@@ -329,202 +272,440 @@ const CL={
   'Abierta':[{id:'o1',label:'Apertura oficial realizada'},{id:'o2',label:'Staff de Scoop en inauguración'},{id:'o3',label:'Redes sociales activadas'},{id:'o4',label:'Primera regalía cobrada (6%)'},{id:'o5',label:'Primera revisión de operación'},{id:'o6',label:'Reporte mensual enviado'}]
 };
 
-let franchises=[], mktData={periods:[],groups:[]}, cities=['Monterrey','CDMX','Mérida','Guadalajara','Torreón','Cancún','Culiacán','León','Madrid','Otra'];
-let mod='franchises', fcSearch='', fcFilter='all', mktPeriod='', mktCat='all';
-let open=new Set();
+// ── STATE ──
+var franchises = [];
+var mktData = {periods:[],groups:[]};
+var cities = ['Monterrey','CDMX','Mérida','Guadalajara','Torreón','Cancún','Culiacán','León','Madrid','Otra'];
+var currentMod = 'franchises';
+var fcSearch = '';
+var fcFilter = 'all';
+var mktPeriod = '';
+var mktCat = 'all';
+var openCards = {};
 
-function sync(s,l){document.getElementById('syncDot').className='sync-dot'+(s?' syncing':s===false?' err':'');document.getElementById('syncLabel').textContent=l;}
-async function saveFC(){sync(true,'Guardando...');try{await setDoc(FC,{data:JSON.stringify(franchises)});sync(false,'Sincronizado ✓');}catch(e){sync(null,'Error');}}
-async function saveMKT(){sync(true,'Guardando...');try{await setDoc(MKT,{data:JSON.stringify(mktData)});sync(false,'Sincronizado ✓');}catch(e){sync(null,'Error');}}
-async function saveCTY(){sync(true,'Guardando...');try{await setDoc(CTY,{data:JSON.stringify(cities)});sync(false,'Sincronizado ✓');}catch(e){sync(null,'Error');}}
+// Firebase refs (set after init)
+var FC_REF, MKT_REF, CTY_REF;
+var firestoreSetDoc, firestoreOnSnapshot;
 
-function se(id){return document.getElementById(id);}
-function fmtD(d){if(!d)return'';const[y,m,day]=d.split('-');const ms=['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];return parseInt(day)+' '+ms[parseInt(m)];}
-function prog(f){let t=0,d=0;STAGES.forEach(s=>CL[s].forEach(i=>{t++;if(f.checks[i.id])d++;}));return{t,d,p:t?Math.round(d/t*100):0};}
-function updateCityDrop(){const s=se('fcCity');if(s)s.innerHTML=cities.map(c=>'<option>'+c+'</option>').join('');}
-function catEmoji(c){return{redes:'📱',video:'🎬',diseno:'🎨',campana:'📣',general:'📋'}[c]||'';}
-function assignLabel(a){return a==='ana'?'👩 Ana':a==='ale'?'👩 Ale':'👯 Ambas';}
-function stageEmoji(s){return{Prospecto:'👀',Negociación:'🤝',Firma:'✍️','Pre-Apertura':'🏗',Abierta:'🍦'}[s]||'';}
+// ── LOGIN ──
+document.getElementById('loginBtn').addEventListener('click', doLogin);
+document.getElementById('loginInput').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
 
-function renderSidebar(){
-  const sb=se('sidebar');
-  if(mod==='franchises'){
-    const c={};STAGES.forEach(s=>c[s]=0);franchises.forEach(f=>{if(c[f.stage]!==undefined)c[f.stage]++;});
-    let h='<div class="slabel">Etapas</div>';
-    h+='<div class="sitem'+(fcFilter==='all'?' active':'')+'" onclick="setFF(\'all\')">🗂 Todos <span class="scnt'+(franchises.length?' hot':'')+'">'+franchises.length+'</span></div>';
-    STAGES.forEach(s=>{h+='<div class="sitem'+(fcFilter===s?' active':'')+'" onclick="setFF(\''+s+'\')">'+stageEmoji(s)+' '+s+' <span class="scnt'+(c[s]?' hot':'')+'">'+c[s]+'</span></div>';});
-    h+='<div class="sdiv"></div><div class="slabel">Ciudad</div>';
-    cities.forEach(c2=>{h+='<div class="sitem" onclick="setCF(\''+c2+'\')">📍 '+c2+'</div>';});
-    h+='<div class="sitem" onclick="addCityPrompt()" style="color:var(--red);font-weight:600">+ Ciudad</div>';
-    sb.innerHTML=h;
+function doLogin(){
+  var val = document.getElementById('loginInput').value;
+  if(val === PASSWORD){
+    sessionStorage.setItem('scoop_ok','1');
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('loader').style.display='flex';
+    initFirebase();
   } else {
-    let h='<div class="slabel">Periodos</div>';
-    mktData.periods.forEach(p=>{h+='<div class="sitem'+(mktPeriod===p?' active':'')+'" onclick="setPeriod(\''+p+'\')">📅 '+p+'</div>';});
-    h+='<div class="sdiv"></div><div class="slabel">Categorías</div>';
-    ['redes','video','diseno','campana','general'].forEach(c2=>{h+='<div class="sitem'+(mktCat===c2?' active':'')+'" onclick="setMktCat(\''+c2+'\')">'+catEmoji(c2)+' '+c2.charAt(0).toUpperCase()+c2.slice(1)+'</div>';});
-    sb.innerHTML=h;
+    document.getElementById('loginError').style.display='block';
+    document.getElementById('loginInput').value='';
+    document.getElementById('loginInput').focus();
   }
 }
 
+if(sessionStorage.getItem('scoop_ok')==='1'){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('loader').style.display='flex';
+}
+
+// ── HELPERS ──
+function $(id){ return document.getElementById(id); }
+function stageEmoji(s){ return {Prospecto:'👀',Negociación:'🤝',Firma:'✍️','Pre-Apertura':'🏗',Abierta:'🍦'}[s]||''; }
+function catEmoji(c){ return {redes:'📱',video:'🎬',diseno:'🎨',campana:'📣',general:'📋'}[c]||''; }
+function fmtD(d){ if(!d)return''; var p=d.split('-'); var ms=['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']; return parseInt(p[2])+' '+ms[parseInt(p[1])]; }
+function assignLabel(a){ return a==='ana'?'👩 Ana':a==='ale'?'👩 Ale':'👯 Ambas'; }
+function prog(f){
+  var t=0,d=0;
+  STAGES.forEach(function(s){ CL[s].forEach(function(i){ t++; if(f.checks[i.id])d++; }); });
+  return {t:t, d:d, p:t?Math.round(d/t*100):0};
+}
+function stageClass(s){ return {Prospecto:'sP',Negociación:'sN',Firma:'sF','Pre-Apertura':'sPre',Abierta:'sA'}[s]||'sP'; }
+function headClass(s){ return {Prospecto:'hP',Negociación:'hN',Firma:'hF','Pre-Apertura':'hPre',Abierta:'hA'}[s]||'hP'; }
+function updateCityDrop(){ var s=$('fcCity'); if(s) s.innerHTML=cities.map(function(c){return'<option>'+c+'</option>';}).join(''); }
+function setSyncing(){ $('syncDot').className='sync-dot syncing'; $('syncLabel').textContent='Guardando...'; }
+function setSynced(){ $('syncDot').className='sync-dot'; $('syncLabel').textContent='Sincronizado ✓'; }
+
+// ── SAVE ──
+function saveFC(){
+  setSyncing();
+  firestoreSetDoc(FC_REF, {data:JSON.stringify(franchises)}).then(setSynced).catch(function(){ $('syncLabel').textContent='Error'; });
+}
+function saveMKT(){
+  setSyncing();
+  firestoreSetDoc(MKT_REF, {data:JSON.stringify(mktData)}).then(setSynced).catch(function(){ $('syncLabel').textContent='Error'; });
+}
+function saveCTY(){
+  setSyncing();
+  firestoreSetDoc(CTY_REF, {data:JSON.stringify(cities)}).then(setSynced).catch(function(){ $('syncLabel').textContent='Error'; });
+}
+
+// ── SIDEBAR ──
+function renderSidebar(){
+  var sb = $('sidebar');
+  if(currentMod === 'franchises'){
+    var c = {}; STAGES.forEach(function(s){c[s]=0;}); franchises.forEach(function(f){if(c[f.stage]!==undefined)c[f.stage]++;});
+    var h = '<div class="slabel">Etapas</div>';
+    h += '<div class="sitem'+(fcFilter==='all'?' active':'')+'" data-action="filter-all">🗂 Todos <span class="scnt'+(franchises.length?' hot':'')+'">'+franchises.length+'</span></div>';
+    STAGES.forEach(function(s){ h += '<div class="sitem'+(fcFilter===s?' active':'')+'" data-action="filter-stage" data-stage="'+s+'">'+stageEmoji(s)+' '+s+' <span class="scnt'+(c[s]?' hot':'')+'">'+c[s]+'</span></div>'; });
+    h += '<div class="sdiv"></div><div class="slabel">Ciudad</div>';
+    cities.forEach(function(c2){ h += '<div class="sitem" data-action="filter-city" data-city="'+c2+'">📍 '+c2+'</div>'; });
+    h += '<div class="sitem" data-action="add-city" style="color:var(--red);font-weight:600">+ Ciudad</div>';
+    sb.innerHTML = h;
+  } else {
+    var h2 = '<div class="slabel">Periodos</div>';
+    mktData.periods.forEach(function(p){ h2 += '<div class="sitem'+(mktPeriod===p?' active':'')+'" data-action="set-period" data-period="'+p+'">📅 '+p+'</div>'; });
+    h2 += '<div class="sdiv"></div><div class="slabel">Categorías</div>';
+    ['redes','video','diseno','campana','general'].forEach(function(c2){ h2 += '<div class="sitem'+(mktCat===c2?' active':'')+'" data-action="set-mcat" data-cat="'+c2+'">'+catEmoji(c2)+' '+c2.charAt(0).toUpperCase()+c2.slice(1)+'</div>'; });
+    sb.innerHTML = h2;
+  }
+}
+
+// ── FRANCHISES ──
 function renderFranchises(){
-  const c={};STAGES.forEach(s=>c[s]=0);franchises.forEach(f=>{if(c[f.stage]!==undefined)c[f.stage]++;});
-  se('fcStats').innerHTML='<div class="stat"><div class="stat-n">'+franchises.length+'</div><div class="stat-l">Total</div></div>'+STAGES.map(s=>'<div class="stat"><div class="stat-n">'+c[s]+'</div><div class="stat-l">'+s+'</div></div>').join('');
-  const list=franchises.filter(f=>{
-    if(fcFilter!=='all'&&f.stage!==fcFilter)return false;
-    if(fcSearch&&!f.name.toLowerCase().includes(fcSearch.toLowerCase())&&!f.city.toLowerCase().includes(fcSearch.toLowerCase()))return false;
+  var c = {}; STAGES.forEach(function(s){c[s]=0;}); franchises.forEach(function(f){if(c[f.stage]!==undefined)c[f.stage]++;});
+  $('fcStats').innerHTML = '<div class="stat"><div class="stat-n">'+franchises.length+'</div><div class="stat-l">Total</div></div>'
+    +STAGES.map(function(s){return '<div class="stat"><div class="stat-n">'+c[s]+'</div><div class="stat-l">'+s+'</div></div>';}).join('');
+
+  var list = franchises.filter(function(f){
+    if(fcFilter!=='all' && f.stage!==fcFilter) return false;
+    if(fcSearch && f.name.toLowerCase().indexOf(fcSearch.toLowerCase())<0 && f.city.toLowerCase().indexOf(fcSearch.toLowerCase())<0) return false;
     return true;
   });
-  const el=se('fcList');
-  if(!list.length){el.innerHTML='<div class="empty"><div class="empty-icon">🍦</div><div class="empty-t">Sin prospectos</div><div class="empty-s">Agrega uno arriba</div></div>';return;}
-  el.innerHTML=list.map(f=>{
-    const pr=prog(f),ini=f.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
-    const si=STAGES.indexOf(f.stage),isOpen=open.has(f.id);
-    const sc={Prospecto:'sP',Negociación:'sN',Firma:'sF','Pre-Apertura':'sPre',Abierta:'sA'}[f.stage]||'sP';
-    const hc={Prospecto:'hP',Negociación:'hN',Firma:'hF','Pre-Apertura':'hPre',Abierta:'hA'}[f.stage]||'hP';
-    return '<div class="fc" id="fc-'+f.id+'"><div class="fc-head" onclick="tFC(\''+f.id+'\')">'
-      +'<div class="fc-av">'+ini+'</div>'
-      +'<div class="fc-info"><div class="fc-name">'+f.name+'</div><div class="fc-city">📍 '+f.city+(f.phone?' · '+f.phone:'')+'</div></div>'
-      +'<div class="fc-right"><div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:'+pr.p+'%"></div></div><div class="prog-txt">'+pr.d+'/'+pr.t+'</div></div>'
-      +'<span class="spill '+sc+'">'+f.stage+'</span><span class="chev'+(isOpen?' open':'')+'">▼</span></div></div>'
-      +'<div class="fc-detail'+(isOpen?' open':'')+'">'
-      +'<div class="pipe-bar">'+STAGES.map((s,i)=>'<div class="pipe-step'+(i<si?' done':i===si?' cur':'')+'" onclick="setFS(\''+f.id+'\',\''+s+'\')">'+s+'</div>').join('')+'</div>'
-      +'<div class="cl-grid">'+STAGES.map(stage=>{
-        const items=CL[stage],d=items.filter(i=>f.checks[i.id]).length;
-        const hclass={Prospecto:'hP',Negociación:'hN',Firma:'hF','Pre-Apertura':'hPre',Abierta:'hA'}[stage]||'hP';
-        return '<div class="cl-sec"><div class="cl-hd '+hclass+'">'+stage+'<span>'+d+'/'+items.length+'</span></div>'
-          +items.map(item=>{const on=!!f.checks[item.id],fv=item.folio?(f.folios[item.folio]||''):'';
-            return '<div class="cl-item"><div class="chk'+(on?' on':'')+'" onclick="tCK(\''+f.id+'\',\''+item.id+'\')">'+(on?'✓':'')+'</div>'
-              +'<div style="flex:1"><div class="cl-lbl'+(on?' done':'')+'">'+item.label+'</div>'
-              +(item.folio?'<div class="folio-row"><span class="folio-lbl">Folio:</span><input class="folio-in" value="'+fv+'" placeholder="—" onchange="uFolio(\''+f.id+'\',\''+item.folio+'\',this.value)" onclick="event.stopPropagation()"></div>':'')
-              +'</div></div>';}).join('')+'</div>';}).join('')+'</div>'
-      +'<div class="fc-notes"><textarea class="notes-ta" placeholder="Notas internas..." onchange="uNotes(\''+f.id+'\',this.value)">'+( f.notes||'')+'</textarea>'
-      +'<button class="btn btn-ghost btn-sm" onclick="delFC(\''+f.id+'\')">🗑</button></div></div></div>';
+
+  var el = $('fcList');
+  if(!list.length){ el.innerHTML='<div class="empty"><div class="empty-icon">🍦</div><div class="empty-t">Sin prospectos</div><div class="empty-s">Agrega uno arriba</div></div>'; return; }
+
+  el.innerHTML = list.map(function(f){
+    var pr=prog(f), ini=f.name.split(' ').map(function(w){return w[0];}).join('').substring(0,2).toUpperCase();
+    var si=STAGES.indexOf(f.stage), isOpen=!!openCards[f.id];
+    var sc=stageClass(f.stage);
+
+    var html = '<div class="fc" id="fc-'+f.id+'">';
+    html += '<div class="fc-head" data-action="toggle-fc" data-fcid="'+f.id+'">';
+    html += '<div class="fc-av">'+ini+'</div>';
+    html += '<div class="fc-info"><div class="fc-name">'+f.name+'</div><div class="fc-city">📍 '+f.city+(f.phone?' · '+f.phone:'')+'</div></div>';
+    html += '<div class="fc-right"><div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:'+pr.p+'%"></div></div><div class="prog-txt">'+pr.d+'/'+pr.t+'</div></div>';
+    html += '<span class="spill '+sc+'">'+f.stage+'</span><span class="chev'+(isOpen?' open':'')+'">▼</span></div></div>';
+    html += '<div class="fc-detail'+(isOpen?' open':'')+'">';
+
+    // Pipeline bar
+    html += '<div class="pipe-bar">';
+    STAGES.forEach(function(s,i){
+      var cls = i<si?'done':i===si?'cur':'';
+      html += '<div class="pipe-step '+cls+'" data-action="set-stage" data-fcid="'+f.id+'" data-stage="'+s+'">'+s+'</div>';
+    });
+    html += '</div>';
+
+    // Checklist grid
+    html += '<div class="cl-grid">';
+    STAGES.forEach(function(stage){
+      var items=CL[stage], d=items.filter(function(i){return f.checks[i.id];}).length;
+      html += '<div class="cl-sec"><div class="cl-hd '+headClass(stage)+'">'+stage+'<span>'+d+'/'+items.length+'</span></div>';
+      items.forEach(function(item){
+        var on = !!f.checks[item.id];
+        var fv = item.folio?(f.folios[item.folio]||''):'';
+        html += '<div class="cl-item">';
+        html += '<div class="chk'+(on?' on':'')+'" data-action="toggle-check" data-fcid="'+f.id+'" data-iid="'+item.id+'">'+(on?'✓':'')+'</div>';
+        html += '<div style="flex:1"><div class="cl-lbl'+(on?' done':'')+'">'+item.label+'</div>';
+        if(item.folio){
+          html += '<div class="folio-row"><span class="folio-lbl">Folio:</span>';
+          html += '<input class="folio-in" value="'+fv+'" placeholder="—" data-fcid="'+f.id+'" data-folio="'+item.folio+'" data-action="update-folio"></div>';
+        }
+        html += '</div></div>';
+      });
+      html += '</div>';
+    });
+    html += '</div>';
+
+    // Notes
+    html += '<div class="fc-notes"><textarea class="notes-ta" placeholder="Notas internas..." data-fcid="'+f.id+'" data-action="update-notes">'+( f.notes||'')+'</textarea>';
+    html += '<button class="btn btn-ghost btn-sm" data-action="delete-fc" data-fcid="'+f.id+'">🗑</button></div>';
+    html += '</div></div>';
+    return html;
   }).join('');
 }
 
+// ── MARKETING ──
 function renderMarketing(){
-  se('ptabs').innerHTML=mktData.periods.map(p=>'<div class="ptab'+(mktPeriod===p?' active':'')+'" onclick="setPeriod(\''+p+'\')">'+p+'</div>').join('')+'<div class="ptab" onclick="addPeriod()">+ Periodo</div>';
-  const groups=mktData.groups.filter(g=>g.period===mktPeriod&&(mktCat==='all'||g.cat===mktCat));
-  const bd=se('mktBoard');
-  if(!groups.length){bd.innerHTML='<div class="empty"><div class="empty-icon">🎨</div><div class="empty-t">Sin tareas</div><div class="empty-s">Agrega una nueva tarea arriba</div></div>';return;}
-  bd.innerHTML=groups.map(g=>{
-    const d=g.tasks.filter(t=>t.done).length,t=g.tasks.length,p=t?Math.round(d/t*100):0,isOpen=open.has('m'+g.id);
-    return '<div class="mgrp"><div class="mgrp-hd" onclick="tMG(\''+g.id+'\')">'
-      +'<span style="font-size:18px">'+(g.emoji||'📋')+'</span><span class="mgrp-title">'+g.title+'</span>'
-      +'<div class="mgrp-meta"><span class="mcat '+g.cat+'">'+catEmoji(g.cat)+' '+g.cat+'</span>'
-      +'<div class="mprog"><div class="mprog-bar"><div class="mprog-fill" style="width:'+p+'%"></div></div><span class="mprog-txt">'+d+'/'+t+'</span></div></div>'
-      +'<span class="mchev'+(isOpen?' open':'')+'">▼</span></div>'
-      +'<div class="mtasks'+(isOpen?' open':'')+'">'
-      +g.tasks.map(tk=>'<div class="mtask'+(tk.subtask?' subtask':'')+'">'
-        +'<div class="pdot p'+( tk.priority||'media')+'"></div>'
-        +'<div class="chk'+(tk.done?' on':'')+'" onclick="tMT(\''+g.id+'\',\''+tk.id+'\')">'+(tk.done?'✓':'')+'</div>'
-        +'<div class="mtask-body"><div class="mtask-txt'+(tk.done?' done':'')+'">'+tk.text+'</div>'
-        +'<div class="mtask-meta">'+(tk.assign?'<span class="achip a'+tk.assign+'">'+assignLabel(tk.assign)+'</span>':'')+(tk.due?'<span class="tdate">📅 '+fmtD(tk.due)+'</span>':'')+'</div></div>'
-        +'<button class="btn btn-ghost btn-sm" onclick="delMT(\''+g.id+'\',\''+tk.id+'\')">🗑</button></div>').join('')
-      +'<div class="madd"><input class="madd-in" id="q'+g.id+'" placeholder="+ Agregar tarea..." onkeydown="qAdd(event,\''+g.id+'\')">'
-      +'<select class="madd-sel" id="qa'+g.id+'"><option value="ale">Ale</option><option value="ana">Ana</option><option value="ambas">Ambas</option></select>'
-      +'<button class="btn btn-red btn-sm" onclick="qAdd(null,\''+g.id+'\')">+</button></div>'
-      +'</div></div>';
+  $('ptabs').innerHTML = mktData.periods.map(function(p){
+    return '<div class="ptab'+(mktPeriod===p?' active':'')+'" data-action="set-period" data-period="'+p+'">'+p+'</div>';
+  }).join('') + '<div class="ptab" data-action="add-period">+ Periodo</div>';
+
+  var groups = mktData.groups.filter(function(g){ return g.period===mktPeriod && (mktCat==='all'||g.cat===mktCat); });
+  var bd = $('mktBoard');
+  if(!groups.length){ bd.innerHTML='<div class="empty"><div class="empty-icon">🎨</div><div class="empty-t">Sin tareas</div><div class="empty-s">Agrega una nueva tarea arriba</div></div>'; return; }
+
+  bd.innerHTML = groups.map(function(g){
+    var d=g.tasks.filter(function(t){return t.done;}).length, t=g.tasks.length, p=t?Math.round(d/t*100):0;
+    var isOpen = !!openCards['mkt-'+g.id];
+    var html = '<div class="mgrp" data-gid="'+g.id+'">';
+    html += '<div class="mgrp-hd" data-action="toggle-mgrp" data-gid="'+g.id+'">';
+    html += '<span style="font-size:18px;pointer-events:none">'+(g.emoji||'📋')+'</span>';
+    html += '<span class="mgrp-title">'+g.title+'</span>';
+    html += '<div class="mgrp-meta"><span class="mcat '+g.cat+'">'+catEmoji(g.cat)+' '+g.cat+'</span>';
+    html += '<div class="mprog"><div class="mprog-bar"><div class="mprog-fill" style="width:'+p+'%"></div></div><span class="mprog-txt">'+d+'/'+t+'</span></div></div>';
+    html += '<span class="mchev'+(isOpen?' open':'')+'">▼</span></div>';
+    html += '<div class="mtasks'+(isOpen?' open':'')+'">';
+    g.tasks.forEach(function(tk){
+      html += '<div class="mtask'+(tk.subtask?' subtask':'')+'">';
+      html += '<div class="pdot p'+(tk.priority||'media')+'"></div>';
+      html += '<div class="chk'+(tk.done?' on':'')+'" data-action="toggle-mtask" data-gid="'+g.id+'" data-tid="'+tk.id+'">'+(tk.done?'✓':'')+'</div>';
+      html += '<div class="mtask-body"><div class="mtask-txt'+(tk.done?' done':'')+'">'+tk.text+'</div>';
+      html += '<div class="mtask-meta">'+(tk.assign?'<span class="achip a'+tk.assign+'">'+assignLabel(tk.assign)+'</span>':'')+(tk.due?'<span class="tdate">📅 '+fmtD(tk.due)+'</span>':'')+'</div></div>';
+      html += '<button class="btn btn-ghost btn-sm" data-action="delete-mtask" data-gid="'+g.id+'" data-tid="'+tk.id+'">🗑</button></div>';
+    });
+    html += '<div class="madd">';
+    html += '<input class="madd-in" id="q'+g.id+'" placeholder="+ Agregar tarea...">';
+    html += '<select class="madd-sel" id="qa'+g.id+'"><option value="ale">Ale</option><option value="ana">Ana</option><option value="ambas">Ambas</option></select>';
+    html += '<button class="btn btn-red btn-sm" data-action="quick-add" data-gid="'+g.id+'">+</button></div>';
+    html += '</div></div>';
+    return html;
   }).join('');
+
+  // Add enter key for quick add inputs
+  groups.forEach(function(g){
+    var inp = $('q'+g.id);
+    if(inp) inp.addEventListener('keydown', function(e){ if(e.key==='Enter') doQuickAdd(g.id); });
+  });
 }
 
-// Exposed globals
-window.tFC=function(id){if(open.has(id))open.delete(id);else open.add(id);renderFranchises();setTimeout(()=>se('fc-'+id)?.scrollIntoView({behavior:'smooth',block:'nearest'}),50);};
-
-// Event delegation - handles card open/close
+// ── MASTER EVENT HANDLER ──
 document.addEventListener('click', function(e){
-  const head = e.target.closest && e.target.closest('.fc-head');
-  if(head){
-    const fc = head.closest('.fc');
-    if(fc){
-      const id = fc.id.replace('fc-','');
-      if(open.has(id))open.delete(id);else open.add(id);
-      renderFranchises();
+  var el = e.target;
+  // Walk up to find data-action
+  for(var i=0; i<6; i++){
+    if(!el || el===document.body) break;
+    var action = el.getAttribute('data-action');
+    if(action){
+      handleAction(action, el, e);
+      return;
     }
+    el = el.parentElement;
   }
 });
-window.tCK=function(fid,iid){const f=franchises.find(x=>x.id===fid);if(!f)return;f.checks[iid]=!f.checks[iid];open.add(fid);renderFranchises();saveFC();};
-window.uFolio=function(fid,key,val){const f=franchises.find(x=>x.id===fid);if(f){f.folios[key]=val;saveFC();}};
-window.uNotes=function(fid,val){const f=franchises.find(x=>x.id===fid);if(f){f.notes=val;saveFC();}};
-window.setFS=function(fid,stage){const f=franchises.find(x=>x.id===fid);if(!f)return;f.stage=stage;open.add(fid);renderFranchises();saveFC();};
-window.delFC=function(fid){if(!confirm('¿Eliminar?'))return;franchises=franchises.filter(f=>f.id!==fid);open.delete(fid);renderFranchises();renderSidebar();saveFC();};
-window.setFF=function(f){fcFilter=f;fcSearch='';se('fcSearch').value='';renderSidebar();renderFranchises();};
-window.setCF=function(c){fcSearch=c;fcFilter='all';renderFranchises();};
-window.addCityPrompt=async function(){const n=prompt('Nombre de la nueva ciudad:');if(!n||!n.trim())return;if(!cities.includes(n.trim())){cities.push(n.trim());await saveCTY();renderSidebar();updateCityDrop();}else alert('Ya existe.');};
-window.tMG=function(id){const k='m'+id;if(open.has(k))open.delete(k);else open.add(k);renderMarketing();};
-window.tMT=function(gid,tid){const g=mktData.groups.find(x=>x.id===gid);if(!g)return;const t=g.tasks.find(x=>x.id===tid);if(!t)return;t.done=!t.done;open.add('m'+gid);renderMarketing();saveMKT();};
-window.delMT=function(gid,tid){const g=mktData.groups.find(x=>x.id===gid);if(!g)return;g.tasks=g.tasks.filter(t=>t.id!==tid);open.add('m'+gid);renderMarketing();saveMKT();};
-window.qAdd=function(e,gid){if(e&&e.key!=='Enter')return;const inp=se('q'+gid),asel=se('qa'+gid);if(!inp?.value.trim())return;const g=mktData.groups.find(x=>x.id===gid);if(!g)return;g.tasks.push({id:'t'+Date.now(),text:inp.value.trim(),done:false,assign:asel?.value||'ale',priority:'media',due:'',subtask:false});inp.value='';open.add('m'+gid);renderMarketing();saveMKT();};
-window.setPeriod=function(p){mktPeriod=p;renderSidebar();renderMarketing();};
-window.setMktCat=function(c){mktCat=mktCat===c?'all':c;renderMarketing();};
-window.addPeriod=function(){const n=prompt('Nombre del periodo:');if(!n?.trim())return;if(!mktData.periods.includes(n.trim()))mktData.periods.push(n.trim());mktPeriod=n.trim();renderMarketing();renderSidebar();saveMKT();};
 
-// Nav
-se('tabFC').addEventListener('click',function(){mod='franchises';document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));se('view-franchises').classList.add('active');renderSidebar();});
-se('tabMkt').addEventListener('click',function(){mod='marketing';document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));se('view-marketing').classList.add('active');renderSidebar();});
-se('btnNewFC').addEventListener('click',()=>{se('fcDate').value=new Date().toISOString().split('T')[0];updateCityDrop();se('fcModal').classList.add('open');});
-se('btnNewMkt').addEventListener('click',()=>{se('mktPeriodIn').value=mktPeriod;se('mktModal').classList.add('open');});
-se('cancelFC').addEventListener('click',()=>se('fcModal').classList.remove('open'));
-se('cancelMkt').addEventListener('click',()=>se('mktModal').classList.remove('open'));
-document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
-se('confirmFC').addEventListener('click',()=>{
-  const name=se('fcName').value.trim();if(!name){alert('Ingresa el nombre.');return;}
-  franchises.unshift({id:'fc'+Date.now(),name,city:se('fcCity').value,phone:se('fcPhone').value,email:se('fcEmail').value,stage:se('fcStage').value,date:se('fcDate').value,notes:'',checks:{},folios:{}});
-  se('fcName').value='';se('fcPhone').value='';se('fcEmail').value='';
-  se('fcModal').classList.remove('open');renderFranchises();renderSidebar();saveFC();
-});
-se('confirmMkt').addEventListener('click',()=>{
-  const text=se('mktText').value.trim(),period=se('mktPeriodIn').value.trim(),groupTitle=se('mktGroup').value.trim();
-  if(!text||!period||!groupTitle){alert('Completa todos los campos.');return;}
-  if(!mktData.periods.includes(period))mktData.periods.push(period);
-  let g=mktData.groups.find(x=>x.period===period&&x.title===groupTitle);
-  if(!g){g={id:'g'+Date.now(),period,title:groupTitle,emoji:'📋',cat:se('mktCat').value,tasks:[]};mktData.groups.push(g);}
-  g.tasks.push({id:'t'+Date.now(),text,done:false,assign:se('mktAssign').value,priority:se('mktPriority').value,due:se('mktDue').value,subtask:false});
-  mktPeriod=period;open.add('m'+g.id);se('mktText').value='';se('mktGroup').value='';
-  se('mktModal').classList.remove('open');renderMarketing();renderSidebar();saveMKT();
-});
-se('fcSearch').addEventListener('input',function(){fcSearch=this.value;renderFranchises();});
-
-async function init(){
-  try{
-    const [fcSnap,mktSnap,ctySnap]=await Promise.all([getDoc(FC),getDoc(MKT),getDoc(CTY)]);
-    if(fcSnap.exists())franchises=JSON.parse(fcSnap.data().data);
-    else await setDoc(FC,{data:JSON.stringify([])});
-    if(mktSnap.exists())mktData=JSON.parse(mktSnap.data().data);
-    else{
-      mktData={periods:['ABRIL - JUNIO'],groups:[
-        {id:'g1',period:'ABRIL - JUNIO',title:'Stories',emoji:'📱',cat:'redes',tasks:[{id:'t1',text:'Todas las sucursales abiertas en el puente VIERNES horario normal',done:false,assign:'ale',priority:'alta',due:'',subtask:false}]},
-        {id:'g2',period:'ABRIL - JUNIO',title:'Subir TikToks',emoji:'🎬',cat:'video',tasks:[{id:'t2',text:'Interactivos con gente en la calle "taste test"',done:false,assign:'ale',priority:'alta',due:'',subtask:false}]},
-        {id:'g3',period:'ABRIL - JUNIO',title:'Apertura Guadalajara',emoji:'🏪',cat:'campana',tasks:[{id:'t3',text:'Video – ya lo está trabajando Diego de la Rosa',done:true,assign:'ale',priority:'alta',due:'',subtask:false},{id:'t4',text:'Invitación apertura friends & family',done:false,assign:'ale',priority:'alta',due:'',subtask:false}]},
-        {id:'g4',period:'ABRIL - JUNIO',title:'Apertura Torreón',emoji:'🏪',cat:'campana',tasks:[{id:'t5',text:'Invitación apertura friends & family',done:false,assign:'ale',priority:'media',due:'',subtask:false}]},
-        {id:'g5',period:'ABRIL - JUNIO',title:'Día del Niño – Abril 30',emoji:'🧒',cat:'campana',tasks:[{id:'t6',text:'Video campaña Polanco – SCOOP LIKE A KID',done:true,assign:'ambas',priority:'alta',due:'2025-04-30',subtask:false},{id:'t7',text:'Reel informal – Artist vs. the art',done:true,assign:'ale',priority:'alta',due:'2025-04-28',subtask:false},{id:'t8',text:'Stories de día del niño',done:false,assign:'ale',priority:'alta',due:'2025-04-30',subtask:false}]},
-        {id:'g6',period:'ABRIL - JUNIO',title:'Sesión Mayo 7 – Monterrey',emoji:'📸',cat:'video',tasks:[{id:'t10',text:'Sesión con temática de aniversario',done:false,assign:'ambas',priority:'alta',due:'2025-05-07',subtask:false},{id:'t11',text:'PPT campaña video aniversario',done:false,assign:'ana',priority:'alta',due:'2025-05-05',subtask:false},{id:'t12',text:'Referencias 2 videos adicionales creativos',done:false,assign:'ale',priority:'media',due:'2025-05-05',subtask:false},{id:'t13',text:'Moodboard fotos: aniversario + relleno',done:false,assign:'ale',priority:'media',due:'2025-05-06',subtask:false}]},
-        {id:'g7',period:'ABRIL - JUNIO',title:'Aniversario 7 años',emoji:'🎂',cat:'campana',tasks:[{id:'t14',text:'Buscar 10 micro influencers / tiktokeras por ciudad',done:false,assign:'ale',priority:'alta',due:'',subtask:false},{id:'t15',text:'Ideas posts aniversario 7 años',done:false,assign:'ale',priority:'media',due:'',subtask:false}]},
-        {id:'g8',period:'ABRIL - JUNIO',title:'Flyers',emoji:'🎨',cat:'diseno',tasks:[{id:'t16',text:'Redo flyer Skinny Frappé + Matcha Frappé nuevo branding',done:false,assign:'ale',priority:'media',due:'',subtask:false}]}
-      ]};
-      await setDoc(MKT,{data:JSON.stringify(mktData)});
-    }
-    if(ctySnap.exists())cities=JSON.parse(ctySnap.data().data);
-    else await setDoc(CTY,{data:JSON.stringify(cities)});
-    mktPeriod=mktData.periods[0]||'';
-    updateCityDrop();
-
-    onSnapshot(FC,s=>{if(s.exists()){franchises=JSON.parse(s.data().data);if(mod==='franchises'){renderFranchises();renderSidebar();}}});
-    onSnapshot(MKT,s=>{if(s.exists()){mktData=JSON.parse(s.data().data);if(mod==='marketing'){renderMarketing();renderSidebar();}}});
-    onSnapshot(CTY,s=>{if(s.exists()){cities=JSON.parse(s.data().data);renderSidebar();updateCityDrop();}});
-
-    se('loader').style.display='none';
-    se('appShell').style.display='block';
-    sync(false,'Sincronizado ✓');
-    renderSidebar();renderFranchises();renderMarketing();
-  }catch(err){
-    console.error(err);
-    se('loader').innerHTML='<div style="text-align:center;padding:40px"><div style="font-size:40px;margin-bottom:16px">⚠️</div><div style="font-family:Playfair Display,serif;font-size:22px;color:#2C1810;margin-bottom:8px">Error de conexión</div><div style="font-size:13px;color:#A08070;margin-bottom:20px">'+err.message+'</div><button onclick="location.reload()" style="background:#C8102E;color:white;border:none;padding:10px 22px;border-radius:50px;font-size:13px;cursor:pointer;font-family:DM Sans,sans-serif;font-weight:600">Reintentar</button></div>';
+document.addEventListener('change', function(e){
+  var el = e.target;
+  var action = el.getAttribute('data-action');
+  if(action === 'update-folio'){
+    var f = franchises.find(function(x){return x.id===el.getAttribute('data-fcid');});
+    if(f){ f.folios[el.getAttribute('data-folio')] = el.value; saveFC(); }
   }
+  if(action === 'update-notes'){
+    var f2 = franchises.find(function(x){return x.id===el.getAttribute('data-fcid');});
+    if(f2){ f2.notes = el.value; saveFC(); }
+  }
+});
+
+function handleAction(action, el, e){
+  var fcid = el.getAttribute('data-fcid');
+  var gid = el.getAttribute('data-gid');
+  var tid = el.getAttribute('data-tid');
+
+  if(action === 'toggle-fc'){
+    var id = el.getAttribute('data-fcid');
+    openCards[id] = !openCards[id];
+    renderFranchises();
+    return;
+  }
+  if(action === 'set-stage'){
+    e.stopPropagation();
+    var f = franchises.find(function(x){return x.id===fcid;});
+    if(f){ f.stage = el.getAttribute('data-stage'); openCards[fcid]=true; renderFranchises(); saveFC(); }
+    return;
+  }
+  if(action === 'toggle-check'){
+    e.stopPropagation();
+    var f2 = franchises.find(function(x){return x.id===fcid;});
+    if(f2){ f2.checks[el.getAttribute('data-iid')] = !f2.checks[el.getAttribute('data-iid')]; openCards[fcid]=true; renderFranchises(); saveFC(); }
+    return;
+  }
+  if(action === 'delete-fc'){
+    if(!confirm('¿Eliminar este prospecto?')) return;
+    franchises = franchises.filter(function(f){return f.id!==fcid;});
+    delete openCards[fcid];
+    renderFranchises(); renderSidebar(); saveFC();
+    return;
+  }
+  if(action === 'filter-all'){ fcFilter='all'; fcSearch=''; $('fcSearch').value=''; renderSidebar(); renderFranchises(); return; }
+  if(action === 'filter-stage'){ fcFilter=el.getAttribute('data-stage'); fcSearch=''; $('fcSearch').value=''; renderSidebar(); renderFranchises(); return; }
+  if(action === 'filter-city'){ fcSearch=el.getAttribute('data-city'); fcFilter='all'; renderFranchises(); return; }
+  if(action === 'add-city'){
+    var n = prompt('Nombre de la nueva ciudad:');
+    if(!n||!n.trim()) return;
+    if(cities.indexOf(n.trim())<0){ cities.push(n.trim()); saveCTY(); renderSidebar(); updateCityDrop(); }
+    else alert('Ya existe.');
+    return;
+  }
+  if(action === 'toggle-mgrp'){
+    var key = 'mkt-'+gid;
+    openCards[key] = !openCards[key];
+    renderMarketing();
+    return;
+  }
+  if(action === 'toggle-mtask'){
+    e.stopPropagation();
+    var g = mktData.groups.find(function(x){return x.id===gid;});
+    if(g){ var tk = g.tasks.find(function(x){return x.id===tid;}); if(tk){ tk.done=!tk.done; openCards['mkt-'+gid]=true; renderMarketing(); saveMKT(); } }
+    return;
+  }
+  if(action === 'delete-mtask'){
+    var g2 = mktData.groups.find(function(x){return x.id===gid;});
+    if(g2){ g2.tasks = g2.tasks.filter(function(t){return t.id!==tid;}); openCards['mkt-'+gid]=true; renderMarketing(); saveMKT(); }
+    return;
+  }
+  if(action === 'quick-add'){ doQuickAdd(gid); return; }
+  if(action === 'set-period'){ mktPeriod=el.getAttribute('data-period'); renderSidebar(); renderMarketing(); return; }
+  if(action === 'add-period'){
+    var nm = prompt('Nombre del periodo (ej. JULIO - SEPTIEMBRE):');
+    if(!nm||!nm.trim()) return;
+    if(mktData.periods.indexOf(nm.trim())<0) mktData.periods.push(nm.trim());
+    mktPeriod=nm.trim(); renderMarketing(); renderSidebar(); saveMKT();
+    return;
+  }
+  if(action === 'set-mcat'){ mktCat = mktCat===el.getAttribute('data-cat')?'all':el.getAttribute('data-cat'); renderMarketing(); return; }
 }
 
-window.startApp = init;
-if(sessionStorage.getItem('scoop_ok')==='1') init();
+function doQuickAdd(gid){
+  var inp = $('q'+gid), asel = $('qa'+gid);
+  if(!inp||!inp.value.trim()) return;
+  var g = mktData.groups.find(function(x){return x.id===gid;});
+  if(!g) return;
+  g.tasks.push({id:'t'+Date.now(), text:inp.value.trim(), done:false, assign:asel?asel.value:'ale', priority:'media', due:'', subtask:false});
+  inp.value = '';
+  openCards['mkt-'+gid] = true;
+  renderMarketing(); saveMKT();
+}
+
+// ── NAV ──
+$('tabFC').addEventListener('click', function(){
+  currentMod='franchises';
+  document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active');});
+  this.classList.add('active');
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
+  $('view-franchises').classList.add('active');
+  renderSidebar();
+});
+$('tabMkt').addEventListener('click', function(){
+  currentMod='marketing';
+  document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active');});
+  this.classList.add('active');
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
+  $('view-marketing').classList.add('active');
+  renderSidebar();
+});
+
+// ── MODALS ──
+$('btnNewFC').addEventListener('click', function(){ $('fcDate').value=new Date().toISOString().split('T')[0]; updateCityDrop(); $('fcModal').classList.add('open'); });
+$('btnNewMkt').addEventListener('click', function(){ $('mktPeriodIn').value=mktPeriod; $('mktModal').classList.add('open'); });
+$('cancelFC').addEventListener('click', function(){ $('fcModal').classList.remove('open'); });
+$('cancelMkt').addEventListener('click', function(){ $('mktModal').classList.remove('open'); });
+document.querySelectorAll('.overlay').forEach(function(o){ o.addEventListener('click', function(e){ if(e.target===o) o.classList.remove('open'); }); });
+
+$('confirmFC').addEventListener('click', function(){
+  var name = $('fcName').value.trim();
+  if(!name){alert('Ingresa el nombre.');return;}
+  franchises.unshift({id:'fc'+Date.now(),name:name,city:$('fcCity').value,phone:$('fcPhone').value,email:$('fcEmail').value,stage:$('fcStage').value,date:$('fcDate').value,notes:'',checks:{},folios:{}});
+  $('fcName').value=''; $('fcPhone').value=''; $('fcEmail').value='';
+  $('fcModal').classList.remove('open');
+  renderFranchises(); renderSidebar(); saveFC();
+});
+
+$('confirmMkt').addEventListener('click', function(){
+  var text=$('mktText').value.trim(), period=$('mktPeriodIn').value.trim(), groupTitle=$('mktGroup').value.trim();
+  if(!text||!period||!groupTitle){alert('Completa todos los campos.');return;}
+  if(mktData.periods.indexOf(period)<0) mktData.periods.push(period);
+  var g = mktData.groups.find(function(x){return x.period===period&&x.title===groupTitle;});
+  if(!g){ g={id:'g'+Date.now(),period:period,title:groupTitle,emoji:'📋',cat:$('mktCat').value,tasks:[]}; mktData.groups.push(g); }
+  g.tasks.push({id:'t'+Date.now(),text:text,done:false,assign:$('mktAssign').value,priority:$('mktPriority').value,due:$('mktDue').value,subtask:false});
+  mktPeriod=period; openCards['mkt-'+g.id]=true;
+  $('mktText').value=''; $('mktGroup').value='';
+  $('mktModal').classList.remove('open');
+  renderMarketing(); renderSidebar(); saveMKT();
+});
+
+$('fcSearch').addEventListener('input', function(){ fcSearch=this.value; renderFranchises(); });
+
+// ── FIREBASE INIT ──
+function initFirebase(){
+  var script = document.createElement('script');
+  script.type = 'module';
+  script.textContent = `
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+    const app = initializeApp({
+      apiKey:"AIzaSyCxjl39lsYyQMVNPPjdPn1dIr5uv47YjsU",
+      authDomain:"scoop-frozen-yogurt.firebaseapp.com",
+      projectId:"scoop-frozen-yogurt",
+      storageBucket:"scoop-frozen-yogurt.firebasestorage.app",
+      messagingSenderId:"880756018979",
+      appId:"1:880756018979:web:e2536756a63f1b7ee18696"
+    });
+    const db = getFirestore(app);
+
+    window.FC_REF = doc(db,'workspace','franchises');
+    window.MKT_REF = doc(db,'workspace','marketing');
+    window.CTY_REF = doc(db,'workspace','cities');
+    FC_REF = window.FC_REF;
+    MKT_REF = window.MKT_REF;
+    CTY_REF = window.CTY_REF;
+    firestoreSetDoc = setDoc;
+
+    async function loadAll(){
+      try{
+        const [fcS,mktS,ctyS] = await Promise.all([getDoc(FC_REF),getDoc(MKT_REF),getDoc(CTY_REF)]);
+        if(fcS.exists()) franchises = JSON.parse(fcS.data().data);
+        else await setDoc(FC_REF,{data:JSON.stringify([])});
+        if(mktS.exists()) mktData = JSON.parse(mktS.data().data);
+        else{
+          mktData = {periods:['ABRIL - JUNIO'],groups:[
+            {id:'g1',period:'ABRIL - JUNIO',title:'Stories',emoji:'📱',cat:'redes',tasks:[{id:'t1',text:'Todas las sucursales abiertas en el puente VIERNES horario normal',done:false,assign:'ale',priority:'alta',due:'',subtask:false}]},
+            {id:'g2',period:'ABRIL - JUNIO',title:'Subir TikToks',emoji:'🎬',cat:'video',tasks:[{id:'t2',text:'Interactivos con gente en la calle "taste test"',done:false,assign:'ale',priority:'alta',due:'',subtask:false}]},
+            {id:'g3',period:'ABRIL - JUNIO',title:'Apertura Guadalajara',emoji:'🏪',cat:'campana',tasks:[{id:'t3',text:'Video – ya lo está trabajando Diego de la Rosa',done:true,assign:'ale',priority:'alta',due:'',subtask:false},{id:'t4',text:'Invitación apertura friends & family',done:false,assign:'ale',priority:'alta',due:'',subtask:false}]},
+            {id:'g4',period:'ABRIL - JUNIO',title:'Apertura Torreón',emoji:'🏪',cat:'campana',tasks:[{id:'t5',text:'Invitación apertura friends & family',done:false,assign:'ale',priority:'media',due:'',subtask:false}]},
+            {id:'g5',period:'ABRIL - JUNIO',title:'Día del Niño – Abril 30',emoji:'🧒',cat:'campana',tasks:[{id:'t6',text:'Video campaña Polanco – SCOOP LIKE A KID',done:true,assign:'ambas',priority:'alta',due:'2025-04-30',subtask:false},{id:'t7',text:'Reel informal – Artist vs. the art',done:true,assign:'ale',priority:'alta',due:'2025-04-28',subtask:false},{id:'t8',text:'Stories de día del niño',done:false,assign:'ale',priority:'alta',due:'2025-04-30',subtask:false}]},
+            {id:'g6',period:'ABRIL - JUNIO',title:'Sesión Mayo 7 – Monterrey',emoji:'📸',cat:'video',tasks:[{id:'t10',text:'Sesión con temática de aniversario',done:false,assign:'ambas',priority:'alta',due:'2025-05-07',subtask:false},{id:'t11',text:'PPT campaña video aniversario',done:false,assign:'ana',priority:'alta',due:'2025-05-05',subtask:false},{id:'t12',text:'Referencias 2 videos adicionales creativos',done:false,assign:'ale',priority:'media',due:'2025-05-05',subtask:false},{id:'t13',text:'Moodboard fotos: aniversario y relleno',done:false,assign:'ale',priority:'media',due:'2025-05-06',subtask:false}]},
+            {id:'g7',period:'ABRIL - JUNIO',title:'Aniversario 7 años',emoji:'🎂',cat:'campana',tasks:[{id:'t14',text:'Buscar 10 micro influencers por ciudad',done:false,assign:'ale',priority:'alta',due:'',subtask:false},{id:'t15',text:'Ideas posts aniversario 7 años',done:false,assign:'ale',priority:'media',due:'',subtask:false}]},
+            {id:'g8',period:'ABRIL - JUNIO',title:'Flyers',emoji:'🎨',cat:'diseno',tasks:[{id:'t16',text:'Redo flyer Skinny Frappé y Matcha Frappé nuevo branding',done:false,assign:'ale',priority:'media',due:'',subtask:false}]}
+          ]};
+          await setDoc(MKT_REF,{data:JSON.stringify(mktData)});
+        }
+        if(ctyS.exists()) cities = JSON.parse(ctyS.data().data);
+        else await setDoc(CTY_REF,{data:JSON.stringify(cities)});
+
+        mktPeriod = mktData.periods[0]||'';
+        updateCityDrop();
+
+        onSnapshot(FC_REF, function(s){ if(s.exists()){ franchises=JSON.parse(s.data().data); if(currentMod==='franchises'){renderFranchises();renderSidebar();} } });
+        onSnapshot(MKT_REF, function(s){ if(s.exists()){ mktData=JSON.parse(s.data().data); if(currentMod==='marketing'){renderMarketing();renderSidebar();} } });
+        onSnapshot(CTY_REF, function(s){ if(s.exists()){ cities=JSON.parse(s.data().data); renderSidebar(); updateCityDrop(); } });
+
+        document.getElementById('loader').style.display='none';
+        document.getElementById('appShell').style.display='block';
+        document.getElementById('syncDot').className='sync-dot';
+        document.getElementById('syncLabel').textContent='Sincronizado ✓';
+        renderSidebar(); renderFranchises(); renderMarketing();
+
+      } catch(err){
+        console.error(err);
+        document.getElementById('loader').innerHTML='<div style="text-align:center;padding:40px"><div style="font-size:40px;margin-bottom:16px">⚠️</div><div style="font-family:Playfair Display,serif;font-size:22px;color:#2C1810;margin-bottom:8px">Error de conexión</div><div style="font-size:13px;color:#A08070;margin-bottom:20px">'+err.message+'</div><button onclick="location.reload()" style="background:#C8102E;color:white;border:none;padding:10px 22px;border-radius:50px;font-size:13px;cursor:pointer;font-weight:600">Reintentar</button></div>';
+      }
+    }
+
+    // Wire up save functions
+    window.firestoreSetDoc = setDoc;
+    loadAll();
+  `;
+  document.body.appendChild(script);
+}
+
+// Auto-start if already logged in
+if(sessionStorage.getItem('scoop_ok')==='1'){
+  initFirebase();
+}
 </script>
 </body>
 </html>
