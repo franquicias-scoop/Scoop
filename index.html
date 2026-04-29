@@ -552,7 +552,7 @@ function renderSidebar() {
       ${STAGES.map(s=>`<div class="sidebar-item ${fcFilter===s?'active':''}" onclick="setFcFilter('${s}',this)">${stageEmoji(s)} ${s} <span class="sidebar-count ${counts[s]?'hot':''}">${counts[s]}</span></div>`).join('')}
       <div class="sidebar-divider"></div>
       <div class="sidebar-label">Ciudad</div>
-      ${['Monterrey','CDMX','Mérida','Guadalajara','Torreón'].map(c=>`<div class="sidebar-item" onclick="setCityFilter('${c}',this)">📍 ${c}</div>`).join('')}`;
+      ${['Monterrey','CDMX','Mérida','Guadalajara','Torreón'Cancún'Culiacán'León].map(c=>`<div class="sidebar-item" onclick="setCityFilter('${c}',this)">📍 ${c}</div>`).join('')}`;
   } else {
     sb.innerHTML=`<div class="sidebar-label">Periodos</div>
       ${mktData.periods.map(p=>`<div class="sidebar-item ${mktPeriod===p?'active':''}" onclick="setPeriod('${p}',this)">📅 ${p}</div>`).join('')}
