@@ -430,6 +430,19 @@ function renderMarketing(){
 
 // Exposed globals
 window.tFC=function(id){if(open.has(id))open.delete(id);else open.add(id);renderFranchises();setTimeout(()=>se('fc-'+id)?.scrollIntoView({behavior:'smooth',block:'nearest'}),50);};
+
+// Event delegation - handles card open/close
+document.addEventListener('click', function(e){
+  const head = e.target.closest && e.target.closest('.fc-head');
+  if(head){
+    const fc = head.closest('.fc');
+    if(fc){
+      const id = fc.id.replace('fc-','');
+      if(open.has(id))open.delete(id);else open.add(id);
+      renderFranchises();
+    }
+  }
+});
 window.tCK=function(fid,iid){const f=franchises.find(x=>x.id===fid);if(!f)return;f.checks[iid]=!f.checks[iid];open.add(fid);renderFranchises();saveFC();};
 window.uFolio=function(fid,key,val){const f=franchises.find(x=>x.id===fid);if(f){f.folios[key]=val;saveFC();}};
 window.uNotes=function(fid,val){const f=franchises.find(x=>x.id===fid);if(f){f.notes=val;saveFC();}};
