@@ -170,7 +170,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(
 .mkt-task-text.done{text-decoration:line-through;color:var(--text-light)}
 .mkt-task-meta{display:flex;gap:7px;align-items:center;margin-top:4px;flex-wrap:wrap}
 .assign-chip{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px}
-.assign-ana{background:#FFE4F0;color:#9B1B5A} .assign-hermana{background:#E4F0FF;color:#1B5A9B} .assign-ambas{background:#E4FFE9;color:#1B7A2A}
+.assign-ana{background:#FFE4F0;color:#9B1B5A} .assign-ale{background:#E4F0FF;color:#1B5A9B} .assign-ambas{background:#E4FFE9;color:#1B7A2A}
 .priority-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
 .p-alta{background:var(--red)} .p-media{background:#FF9800} .p-baja{background:#4CAF50}
 .task-date{font-size:10px;color:var(--text-light);background:var(--cream);border-radius:20px;padding:2px 7px;border:1px solid var(--cream-dark)}
@@ -303,7 +303,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(
     <div class="form-row">
       <div class="form-g"><label class="form-l">Nombre</label><input class="form-in" id="fc-name" placeholder="Ej. Carlos Mendoza"></div>
       <div class="form-g"><label class="form-l">Ciudad</label>
-        <select class="form-in" id="fc-city"><option>Monterrey</option><option>CDMX</option><option>Mérida</option><option>Guadalajara</option><option>Torreón</option><option>Cancún</option></select>Culiacán</option></select>León</option></select>
+        <select class="form-in" id="fc-city" id="fc-city"></select>
       </div>
     </div>
     <div class="form-row">
@@ -347,7 +347,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(
       </div>
       <div class="form-g"><label class="form-l">Asignado a</label>
         <select class="form-in" id="mkt-assign">
-          <option value="hermana">Hermana (Marketing)</option>
+          <option value="ale">Ale (Marketing)</option>
           <option value="ana">Ana (Franquicias)</option>
           <option value="ambas">Ambas</option>
         </select>
@@ -442,10 +442,14 @@ let fcFilter = 'all';
 let mktPeriod = '';
 let openCards = new Set();
 let saving = false;
+let cities = ['Monterrey','CDMX','Mérida','Guadalajara','Torreón','Cancún','Culiacán','León','Madrid','Otra'];
+let cities = ['Monterrey','CDMX','Mérida','Guadalajara','Torreón','Cancún','Culiacán','León','Madrid','Otra'];
 
 // ── FIREBASE ──
 const FC_DOC = doc(db, 'workspace', 'franchises');
 const MKT_DOC = doc(db, 'workspace', 'marketing');
+const CITIES_DOC = doc(db, 'workspace', 'cities');
+const CITIES_DOC = doc(db, 'workspace', 'cities');
 
 function setSyncing() { document.getElementById('syncDot').className='sync-dot syncing'; document.getElementById('syncLabel').textContent='Guardando...'; }
 function setSynced() { document.getElementById('syncDot').className='sync-dot'; document.getElementById('syncLabel').textContent='Sincronizado ✓'; }
@@ -458,6 +462,16 @@ async function saveFC() {
 async function saveMKT() {
   setSyncing();
   try { await setDoc(MKT_DOC, { data: JSON.stringify(mktData) }); setSynced(); } catch(e) { setError(); }
+}
+
+async function saveCities() {
+  setSyncing();
+  try { await setDoc(CITIES_DOC, { data: JSON.stringify(cities) }); setSynced(); } catch(e) { setError(); }
+}
+
+async function saveCities() {
+  setSyncing();
+  try { await setDoc(CITIES_DOC, { data: JSON.stringify(cities) }); setSynced(); } catch(e) { setError(); }
 }
 
 // Real-time listeners
@@ -476,6 +490,15 @@ onSnapshot(MKT_DOC, (snap) => {
     if (!mktPeriod && parsed.periods.length) mktPeriod = parsed.periods[0];
     if (currentModule === 'marketing') renderMarketing();
     renderSidebar();
+  }
+});
+
+onSnapshot(CITIES_DOC, (snap) => {
+  if (snap.exists()) {
+    cities = JSON.parse(snap.data().data);
+    renderSidebar();
+    const sel = document.getElementById('fc-city');
+    if(sel) sel.innerHTML = cities.map(c=>'<option>'+c+'</option>').join('');
   }
 });
 
@@ -501,20 +524,28 @@ async function init() {
       mktData = {
         periods:['ABRIL - JUNIO'],
         groups:[
-          {id:'g1',period:'ABRIL - JUNIO',title:'Stories',emoji:'📱',cat:'redes',tasks:[{id:'t1',text:'Todas las sucursales abiertas en el puente VIERNES horario normal',done:false,assign:'hermana',priority:'alta',due:'',subtask:false}]},
-          {id:'g2',period:'ABRIL - JUNIO',title:'Subir TikToks',emoji:'🎬',cat:'video',tasks:[{id:'t2',text:'Interactivos con gente en la calle "taste test" o "del 1 al 10 cuánto le das a Scoop"',done:false,assign:'hermana',priority:'alta',due:'',subtask:false}]},
-          {id:'g3',period:'ABRIL - JUNIO',title:'Apertura Guadalajara',emoji:'🏪',cat:'campaña',tasks:[{id:'t3',text:'Video – ya lo está trabajando Diego de la Rosa',done:true,assign:'hermana',priority:'alta',due:'',subtask:false},{id:'t4',text:'Invitación de apertura friends & family – linda, cute y colorida',done:false,assign:'hermana',priority:'alta',due:'',subtask:false}]},
-          {id:'g4',period:'ABRIL - JUNIO',title:'Apertura Torreón',emoji:'🏪',cat:'campaña',tasks:[{id:'t5',text:'Invitación de apertura friends & family – linda, cute y colorida',done:false,assign:'hermana',priority:'media',due:'',subtask:false}]},
-          {id:'g5',period:'ABRIL - JUNIO',title:'Día del Niño – Abril 30',emoji:'🧒',cat:'campaña',tasks:[{id:'t6',text:'Video campaña Polanco – SCOOP LIKE A KID',done:true,assign:'ambas',priority:'alta',due:'2025-04-30',subtask:false},{id:'t7',text:'Reel informal – "Artist vs. the art"',done:true,assign:'hermana',priority:'alta',due:'2025-04-28',subtask:false},{id:'t8',text:'Stories de día del niño',done:false,assign:'hermana',priority:'alta',due:'2025-04-30',subtask:false},{id:'t9',text:'Stories padres para campaña SCOOP LIKE A KID',done:false,assign:'hermana',priority:'media',due:'2025-04-30',subtask:true}]},
-          {id:'g6',period:'ABRIL - JUNIO',title:'Sesión Mayo 7 – Monterrey',emoji:'📸',cat:'video',tasks:[{id:'t10',text:'Sesión con temática de aniversario',done:false,assign:'ambas',priority:'alta',due:'2025-05-07',subtask:false},{id:'t11',text:'PPT de campaña con ideas para video aniversario – estilo scoop sundae con velitas',done:false,assign:'ana',priority:'alta',due:'2025-05-05',subtask:false},{id:'t12',text:'Buscar referencias 2 videos adicionales creativos',done:false,assign:'hermana',priority:'media',due:'2025-05-05',subtask:false},{id:'t13',text:'Moodboard de fotos: aniversario + fotos de relleno',done:false,assign:'hermana',priority:'media',due:'2025-05-06',subtask:false}]},
-          {id:'g7',period:'ABRIL - JUNIO',title:'Aniversario 7 años',emoji:'🎂',cat:'campaña',tasks:[{id:'t14',text:'Buscar 10 micro influencers / tiktokeras por ciudad (MTY, CDMX, Mérida, Torreón, GDL)',done:false,assign:'hermana',priority:'alta',due:'',subtask:false},{id:'t15',text:'Ideas de posts de aniversario de 7 años',done:false,assign:'hermana',priority:'media',due:'',subtask:false}]},
-          {id:'g8',period:'ABRIL - JUNIO',title:'Flyers',emoji:'🎨',cat:'diseño',tasks:[{id:'t16',text:'Redo flyer Skinny Frappé + Matcha Frappé con el nuevo branding',done:false,assign:'hermana',priority:'media',due:'',subtask:false}]},
+          {id:'g1',period:'ABRIL - JUNIO',title:'Stories',emoji:'📱',cat:'redes',tasks:[{id:'t1',text:'Todas las sucursales abiertas en el puente VIERNES horario normal',done:false,assign:'ale',priority:'alta',due:'',subtask:false}]},
+          {id:'g2',period:'ABRIL - JUNIO',title:'Subir TikToks',emoji:'🎬',cat:'video',tasks:[{id:'t2',text:'Interactivos con gente en la calle "taste test" o "del 1 al 10 cuánto le das a Scoop"',done:false,assign:'ale',priority:'alta',due:'',subtask:false}]},
+          {id:'g3',period:'ABRIL - JUNIO',title:'Apertura Guadalajara',emoji:'🏪',cat:'campaña',tasks:[{id:'t3',text:'Video – ya lo está trabajando Diego de la Rosa',done:true,assign:'ale',priority:'alta',due:'',subtask:false},{id:'t4',text:'Invitación de apertura friends & family – linda, cute y colorida',done:false,assign:'ale',priority:'alta',due:'',subtask:false}]},
+          {id:'g4',period:'ABRIL - JUNIO',title:'Apertura Torreón',emoji:'🏪',cat:'campaña',tasks:[{id:'t5',text:'Invitación de apertura friends & family – linda, cute y colorida',done:false,assign:'ale',priority:'media',due:'',subtask:false}]},
+          {id:'g5',period:'ABRIL - JUNIO',title:'Día del Niño – Abril 30',emoji:'🧒',cat:'campaña',tasks:[{id:'t6',text:'Video campaña Polanco – SCOOP LIKE A KID',done:true,assign:'ambas',priority:'alta',due:'2025-04-30',subtask:false},{id:'t7',text:'Reel informal – "Artist vs. the art"',done:true,assign:'ale',priority:'alta',due:'2025-04-28',subtask:false},{id:'t8',text:'Stories de día del niño',done:false,assign:'ale',priority:'alta',due:'2025-04-30',subtask:false},{id:'t9',text:'Stories padres para campaña SCOOP LIKE A KID',done:false,assign:'ale',priority:'media',due:'2025-04-30',subtask:true}]},
+          {id:'g6',period:'ABRIL - JUNIO',title:'Sesión Mayo 7 – Monterrey',emoji:'📸',cat:'video',tasks:[{id:'t10',text:'Sesión con temática de aniversario',done:false,assign:'ambas',priority:'alta',due:'2025-05-07',subtask:false},{id:'t11',text:'PPT de campaña con ideas para video aniversario – estilo scoop sundae con velitas',done:false,assign:'ana',priority:'alta',due:'2025-05-05',subtask:false},{id:'t12',text:'Buscar referencias 2 videos adicionales creativos',done:false,assign:'ale',priority:'media',due:'2025-05-05',subtask:false},{id:'t13',text:'Moodboard de fotos: aniversario + fotos de relleno',done:false,assign:'ale',priority:'media',due:'2025-05-06',subtask:false}]},
+          {id:'g7',period:'ABRIL - JUNIO',title:'Aniversario 7 años',emoji:'🎂',cat:'campaña',tasks:[{id:'t14',text:'Buscar 10 micro influencers / tiktokeras por ciudad (MTY, CDMX, Mérida, Torreón, GDL)',done:false,assign:'ale',priority:'alta',due:'',subtask:false},{id:'t15',text:'Ideas de posts de aniversario de 7 años',done:false,assign:'ale',priority:'media',due:'',subtask:false}]},
+          {id:'g8',period:'ABRIL - JUNIO',title:'Flyers',emoji:'🎨',cat:'diseño',tasks:[{id:'t16',text:'Redo flyer Skinny Frappé + Matcha Frappé con el nuevo branding',done:false,assign:'ale',priority:'media',due:'',subtask:false}]},
         ]
       };
       await setDoc(MKT_DOC, { data: JSON.stringify(mktData) });
     }
 
     mktPeriod = mktData.periods[0] || '';
+
+    // Load cities
+    const citiesSnap = await getDoc(CITIES_DOC);
+    if (citiesSnap.exists()) {
+      cities = JSON.parse(citiesSnap.data().data);
+    } else {
+      await setDoc(CITIES_DOC, { data: JSON.stringify(cities) });
+    }
     document.getElementById('loader').style.display = 'none';
     setSynced();
     render();
@@ -552,7 +583,8 @@ function renderSidebar() {
       ${STAGES.map(s=>`<div class="sidebar-item ${fcFilter===s?'active':''}" onclick="setFcFilter('${s}',this)">${stageEmoji(s)} ${s} <span class="sidebar-count ${counts[s]?'hot':''}">${counts[s]}</span></div>`).join('')}
       <div class="sidebar-divider"></div>
       <div class="sidebar-label">Ciudad</div>
-      ${['Monterrey','CDMX','Mérida','Guadalajara','Torreón'Cancún'Culiacán'León].map(c=>`<div class="sidebar-item" onclick="setCityFilter('${c}',this)">📍 ${c}</div>`).join('')}`;
+      ${cities.map(c=>`<div class="sidebar-item" onclick="setCityFilter('`+"`"+`${c}`+"`"+`',this)">📍 ${c}</div>`).join('')}
+      <div class="sidebar-item" onclick="addCity()" style="color:var(--red);font-weight:600;">+ Ciudad</div>`;
   } else {
     sb.innerHTML=`<div class="sidebar-label">Periodos</div>
       ${mktData.periods.map(p=>`<div class="sidebar-item ${mktPeriod===p?'active':''}" onclick="setPeriod('${p}',this)">📅 ${p}</div>`).join('')}
@@ -653,7 +685,7 @@ function renderMarketing(){
           <div class="mkt-task-body">
             <div class="mkt-task-text ${t.done?'done':''}">${t.text}</div>
             <div class="mkt-task-meta">
-              ${t.assign?`<span class="assign-chip assign-${t.assign}">${t.assign==='ana'?'👩 Ana':t.assign==='hermana'?'👩 Hermana':'👯 Ambas'}</span>`:''}
+              ${t.assign?`<span class="assign-chip assign-${t.assign}">${t.assign==='ana'?'👩 Ana':t.assign==='ale'?'👩 Ale':'👯 Ambas'}</span>`:''}
               ${t.due?`<span class="task-date">📅 ${fmtDate(t.due)}</span>`:''}
             </div>
           </div>
@@ -661,7 +693,7 @@ function renderMarketing(){
         </div>`).join('')}
         <div class="mkt-add-task">
           <input class="mkt-add-in" id="quick-${g.id}" placeholder="+ Agregar tarea..." onkeydown="quickAdd(event,'${g.id}')">
-          <select class="mkt-add-select" id="qa-${g.id}"><option value="hermana">Hermana</option><option value="ana">Ana</option><option value="ambas">Ambas</option></select>
+          <select class="mkt-add-select" id="qa-${g.id}"><option value="ale">Hermana</option><option value="ana">Ana</option><option value="ambas">Ambas</option></select>
           <button class="btn btn-red btn-sm" onclick="quickAdd(null,'${g.id}')">+</button>
         </div>
       </div>
@@ -673,7 +705,7 @@ function fmtDate(d){if(!d)return'';const[y,m,day]=d.split('-');const ms=['','Ene
 window.toggleMktGroup=function(id){const k='mkt-'+id;if(openCards.has(k))openCards.delete(k);else openCards.add(k);renderMarketing();}
 window.toggleMktTask=function(gid,tid){const g=mktData.groups.find(x=>x.id===gid);if(!g)return;const t=g.tasks.find(x=>x.id===tid);if(!t)return;t.done=!t.done;openCards.add('mkt-'+gid);renderMarketing();saveMKT();}
 window.deleteMktTask=function(gid,tid){const g=mktData.groups.find(x=>x.id===gid);if(!g)return;g.tasks=g.tasks.filter(t=>t.id!==tid);openCards.add('mkt-'+gid);renderMarketing();saveMKT();}
-window.quickAdd=function(e,gid){if(e&&e.key!=='Enter')return;const inp=document.getElementById('quick-'+gid),asel=document.getElementById('qa-'+gid);if(!inp?.value.trim())return;const g=mktData.groups.find(x=>x.id===gid);if(!g)return;g.tasks.push({id:'t'+Date.now(),text:inp.value.trim(),done:false,assign:asel?.value||'hermana',priority:'media',due:'',subtask:false});inp.value='';openCards.add('mkt-'+gid);renderMarketing();saveMKT();}
+window.quickAdd=function(e,gid){if(e&&e.key!=='Enter')return;const inp=document.getElementById('quick-'+gid),asel=document.getElementById('qa-'+gid);if(!inp?.value.trim())return;const g=mktData.groups.find(x=>x.id===gid);if(!g)return;g.tasks.push({id:'t'+Date.now(),text:inp.value.trim(),done:false,assign:asel?.value||'ale',priority:'media',due:'',subtask:false});inp.value='';openCards.add('mkt-'+gid);renderMarketing();saveMKT();}
 window.setPeriod=function(p,el){mktPeriod=p;document.querySelectorAll('#sidebar .sidebar-item').forEach(i=>i.classList.remove('active'));el?.classList.add('active');renderMarketing();renderSidebar();}
 window.filterCat=function(c){mktCatFilter=mktCatFilter===c?'all':c;renderMarketing();}
 window.addPeriod=function(){const n=prompt('Nombre del nuevo periodo (ej. JULIO - SEPTIEMBRE):');if(!n?.trim())return;if(!mktData.periods.includes(n.trim()))mktData.periods.push(n.trim());mktPeriod=n.trim();renderMarketing();renderSidebar();saveMKT();}
