@@ -373,7 +373,12 @@ var insData = {
     {id:'b12',nombre:'Lotus',proveedor:'',costo:'',margen:15,precio:''}
   ],
   toppings: [],
-  uniformes: []
+  uniformes: [],
+  bebidas: [
+    {id:'beb1',nombre:'Matcha Frappé',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'beb2',nombre:'Skinny Frappé',proveedor:'',costo:'',margen:15,precio:''}
+  ],
+  pastas: []
 };
 
 // ── HELPERS ──
@@ -876,7 +881,9 @@ function renderInsumos(){
     {key:'empaques', label:'📦 Empaques', cols:['Producto','Proveedor','Costo Unitario','% Margen','Precio Franquicia'], hasProveedor:true},
     {key:'bases', label:'🍦 Bases', cols:['Producto','Proveedor','Costo Unitario','% Margen','Precio Franquicia'], hasProveedor:true},
     {key:'toppings', label:'🍓 Toppings', cols:['Producto','% Margen','Precio Franquicia'], hasProveedor:false},
-    {key:'uniformes', label:'👕 Uniformes', cols:['Producto','Proveedor','% Margen','Precio Franquicia'], hasProveedor:true}
+    {key:'uniformes', label:'👕 Uniformes', cols:['Producto','Proveedor','% Margen','Precio Franquicia'], hasProveedor:true},
+    {key:'bebidas', label:'🥤 Bebidas', cols:['Producto','Proveedor','Costo Unitario','% Margen','Precio Franquicia'], hasProveedor:true},
+    {key:'pastas', label:'🍫 Pastas para Nieves', cols:['Producto','Proveedor','Costo Unitario','% Margen','Precio Franquicia'], hasProveedor:true}
   ];
 
   var html = '';
