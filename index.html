@@ -157,6 +157,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .empty-t{font-family:'Playfair Display',serif;font-size:20px;color:var(--text-mid)}
 .empty-s{font-size:13px;color:var(--text-light);margin-top:6px}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--cream)}::-webkit-scrollbar-thumb{background:var(--cream-dark);border-radius:3px}
+
+.ins-section{background:white;border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;margin-bottom:20px;border:1.5px solid var(--cream-dark)}
+.ins-sec-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--cream);border-bottom:1px solid var(--cream-dark);font-weight:700;font-size:15px}
+.ins-table-wrap{overflow-x:auto}
+.ins-table{width:100%;border-collapse:collapse;min-width:500px}
+.ins-table thead th{padding:9px 12px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-light);background:var(--cream);border-bottom:1px solid var(--cream-dark);text-align:left;white-space:nowrap}
+.ins-table tbody tr{border-bottom:1px solid var(--cream)}
+.ins-table tbody tr:last-child{border-bottom:none}
+.ins-table tbody tr:hover{background:#fffaf8}
+.ins-table td{padding:6px 8px}
+.ins-in{width:100%;padding:6px 9px;border:1.5px solid transparent;border-radius:var(--rs);font-size:13px;font-family:'DM Sans',sans-serif;background:transparent;color:var(--text);outline:none;min-width:80px}
+.ins-in:hover{border-color:var(--cream-dark);background:var(--cream)}
+.ins-in:focus{border-color:var(--red);background:white}
+.ins-num{max-width:100px;text-align:right}
+.ins-precio{color:var(--red);font-weight:600}
 </style>
 </head>
 <body>
@@ -207,6 +222,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
         <div class="periodtabs" id="ptabs"></div>
         <div class="mboard" id="mboard"></div>
       </div>
+      <div class="view" id="vins">
+        <div class="phead">
+          <div><div class="ptitle">💰 Insumos</div><div class="psub">Costos, márgenes y precios para franquicias</div></div>
+        </div>
+        <div id="insContent"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -250,6 +271,7 @@ var db = firebase.firestore();
 var FC  = db.collection('ws').doc('franchises');
 var MKT = db.collection('ws').doc('marketing');
 var CTY = db.collection('ws').doc('cities');
+var INS = db.collection('ws').doc('insumos');
 
 // ── CONSTANTS ──
 var STAGES = ['Prospecto','Primera Etapa','Pre-Apertura','Cerca Apertura','Apertura'];
@@ -319,6 +341,40 @@ var fcSearch = '';
 var mktPeriod = '';
 var openFC = {};
 var openMG = {};
+var insData = {
+  empaques: [
+    {id:'e1',nombre:'Scoop Cup 8oz',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'e2',nombre:'Scoop Cup 12oz',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'e3',nombre:'Scoop Cup 16oz',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'e4',nombre:'Sundae Cup',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'e5',nombre:'Tapa Domo 12oz',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'e6',nombre:'Tapa Domo 16oz',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'e7',nombre:'Vaso Bebidas Frías 16oz',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'e8',nombre:'Tapa Vaso Bebidas Frías 16oz',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'e9',nombre:'Vaso Bebidas Calientes 16oz',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'e10',nombre:'Tapa Vaso Bebidas Calientes 16oz',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'e11',nombre:'Cucharas',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'e12',nombre:'Servilletas',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'e13',nombre:'Litro',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'e14',nombre:'Medio Litro',proveedor:'',costo:'',margen:15,precio:''}
+  ],
+  bases: [
+    {id:'b1',nombre:'Natural',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'b2',nombre:'Natural Stevia',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'b3',nombre:'BLM',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'b4',nombre:'Polvo Taro',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'b5',nombre:'Taro',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'b6',nombre:'Dark Chocolate',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'b7',nombre:'Vainilla Soft (Mantequilla)',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'b8',nombre:'Vainilla Keto',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'b9',nombre:'Matcha Stevia',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'b10',nombre:'Blueberry Stevia',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'b11',nombre:'Mango Stevia',proveedor:'',costo:'',margen:15,precio:''},
+    {id:'b12',nombre:'Lotus',proveedor:'',costo:'',margen:15,precio:''}
+  ],
+  toppings: [],
+  uniformes: []
+};
 
 // ── HELPERS ──
 function el(id){ return document.getElementById(id); }
@@ -334,6 +390,7 @@ function updateCityDrop(){ var s=el('mfcCity'); if(s) s.innerHTML=cities.map(fun
 // ── SAVE ──
 function saveFC(){ setSyncing(); FC.set({data:JSON.stringify(franchises)}).then(setSynced).catch(function(e){el('slbl').textContent='Error: '+e.message;}); }
 function saveMKT(){ setSyncing(); MKT.set({data:JSON.stringify(mktData)}).then(setSynced).catch(function(e){el('slbl').textContent='Error: '+e.message;}); }
+function saveINS(){ setSyncing(); INS.set({data:JSON.stringify(insData)}).then(setSynced).catch(function(e){el('slbl').textContent='Error: '+e.message;}); }
 function saveCTY(){ setSyncing(); CTY.set({data:JSON.stringify(cities)}).then(setSynced).catch(function(e){el('slbl').textContent='Error: '+e.message;}); }
 
 // ── LOGIN ──
@@ -345,6 +402,10 @@ function doLogin(){
   if(pw === 'KiraBueno401'){
     sessionStorage.setItem('scoop_role','owner');
     role = 'owner';
+    startApp();
+  } else if(pw === 'Kenia2026'){
+    sessionStorage.setItem('scoop_role','admin');
+    role = 'admin';
     startApp();
   } else if(pw === 'scoop2026'){
     sessionStorage.setItem('scoop_role','marketing');
@@ -368,8 +429,8 @@ function startApp(){
 
 // ── LOAD DATA ──
 function loadData(){
-  Promise.all([FC.get(), MKT.get(), CTY.get()]).then(function(snaps){
-    var fcSnap=snaps[0], mktSnap=snaps[1], ctySnap=snaps[2];
+  Promise.all([FC.get(), MKT.get(), CTY.get(), INS.get()]).then(function(snaps){
+    var fcSnap=snaps[0], mktSnap=snaps[1], ctySnap=snaps[2], insSnap=snaps[3];
 
     if(fcSnap.exists){ franchises=JSON.parse(fcSnap.data().data); }
     else { franchises=[]; FC.set({data:JSON.stringify([])}); }
@@ -392,11 +453,14 @@ function loadData(){
 
     if(ctySnap.exists){ cities=JSON.parse(ctySnap.data().data); }
     else { CTY.set({data:JSON.stringify(cities)}); }
+    if(insSnap.exists){ insData=JSON.parse(insSnap.data().data); }
+    else { INS.set({data:JSON.stringify(insData)}); }
 
     mktPeriod = mktData.periods[0]||'';
     updateCityDrop();
 
     // Real-time listeners
+    INS.onSnapshot(function(s){ if(s.exists){ insData=JSON.parse(s.data().data); if(currentTab==='ins') renderInsumos(); } });
     FC.onSnapshot(function(s){ if(s.exists){ franchises=JSON.parse(s.data().data); if(currentTab==='fc'){renderFC();renderSidebar();} } });
     MKT.onSnapshot(function(s){ if(s.exists){ mktData=JSON.parse(s.data().data); if(mktPeriod&&!mktData.periods.includes(mktPeriod))mktPeriod=mktData.periods[0]||''; if(currentTab==='mkt'){renderMkt();renderSidebar();} } });
     CTY.onSnapshot(function(s){ if(s.exists){ cities=JSON.parse(s.data().data); updateCityDrop(); renderSidebar(); } });
@@ -406,7 +470,7 @@ function loadData(){
     setSynced();
     buildTabs();
     renderSidebar();
-    showTab(role==='marketing'?'mkt':'fc');
+    showTab(role==='marketing'?'mkt':role==='admin'?'ins':'fc');
 
   }).catch(function(err){
     el('loader').innerHTML='<div style="text-align:center;padding:40px"><div style="font-size:36px;margin-bottom:12px">⚠️</div><div style="font-family:Playfair Display,serif;font-size:20px;color:#2C1810;margin-bottom:8px">Error de conexión</div><div style="font-size:12px;color:#A08070;margin-bottom:16px">'+err.message+'</div><button id="retryBtn" style="background:#C8102E;color:white;border:none;padding:10px 20px;border-radius:50px;font-size:13px;cursor:pointer;font-weight:600">Reintentar</button></div>';
@@ -419,7 +483,9 @@ function loadData(){
 function buildTabs(){
   var tabs=el('ntabs');
   if(role==='owner'){
-    tabs.innerHTML='<button class="ntab on" data-tab="fc">🏪 Franquicias</button><button class="ntab" data-tab="mkt">🎨 Marketing</button>';
+    tabs.innerHTML='<button class="ntab on" data-tab="fc">🏪 Franquicias</button><button class="ntab" data-tab="mkt">🎨 Marketing</button><button class="ntab" data-tab="ins">💰 Insumos</button>';
+  } else if(role==='admin'){
+    tabs.innerHTML='<button class="ntab on" data-tab="ins">💰 Insumos</button>';
   } else {
     tabs.innerHTML='<button class="ntab on" data-tab="mkt">🎨 Marketing</button>';
   }
@@ -433,7 +499,9 @@ function showTab(tab){
   document.querySelectorAll('.ntab').forEach(function(b){ b.classList.toggle('on',b.dataset.tab===tab); });
   el('vfc').classList.toggle('on',tab==='fc');
   el('vmkt').classList.toggle('on',tab==='mkt');
+  el('vins').classList.toggle('on',tab==='ins');
   renderSidebar();
+  if(tab==='ins') renderInsumos();
 }
 
 // ── SIDEBAR ──
@@ -794,6 +862,107 @@ el('okMkt').addEventListener('click',function(){
 });
 
 el('fcsrch').addEventListener('input',function(){ fcSearch=this.value; renderFC(); });
+
+// ── RENDER INSUMOS ──
+function calcPrecio(costo, margen){
+  var c = parseFloat(costo);
+  var m = parseFloat(margen);
+  if(isNaN(c)||isNaN(m)) return '';
+  return (c * (1 + m/100)).toFixed(2);
+}
+
+function renderInsumos(){
+  var cats = [
+    {key:'empaques', label:'📦 Empaques', cols:['Producto','Proveedor','Costo Unitario','% Margen','Precio Franquicia'], hasProveedor:true},
+    {key:'bases', label:'🍦 Bases', cols:['Producto','Proveedor','Costo Unitario','% Margen','Precio Franquicia'], hasProveedor:true},
+    {key:'toppings', label:'🍓 Toppings', cols:['Producto','% Margen','Precio Franquicia'], hasProveedor:false},
+    {key:'uniformes', label:'👕 Uniformes', cols:['Producto','Proveedor','% Margen','Precio Franquicia'], hasProveedor:true}
+  ];
+
+  var html = '';
+  cats.forEach(function(cat){
+    var items = insData[cat.key]||[];
+    html += '<div class="ins-section" id="ins-'+cat.key+'">';
+    html += '<div class="ins-sec-head"><span>'+cat.label+'</span><button class="btn bred bsm" id="insadd-'+cat.key+'">+ Agregar</button></div>';
+    html += '<div class="ins-table-wrap"><table class="ins-table"><thead><tr>';
+    cat.cols.forEach(function(c){ html += '<th>'+c+'</th>'; });
+    html += '<th></th></tr></thead><tbody>';
+
+    items.forEach(function(item){
+      var precioCalc = calcPrecio(item.costo, item.margen);
+      html += '<tr id="insr-'+item.id+'">';
+      html += '<td><input class="ins-in" value="'+(item.nombre||'')+'" data-ins="'+cat.key+'" data-id="'+item.id+'" data-field="nombre" placeholder="Nombre"></td>';
+      if(cat.hasProveedor) html += '<td><input class="ins-in" value="'+(item.proveedor||'')+'" data-ins="'+cat.key+'" data-id="'+item.id+'" data-field="proveedor" placeholder="Proveedor"></td>';
+      if(cat.key!=='uniformes') html += '<td><input class="ins-in ins-num" value="'+(item.costo||'')+'" data-ins="'+cat.key+'" data-id="'+item.id+'" data-field="costo" placeholder="$0.00"></td>';
+      html += '<td><input class="ins-in ins-num" value="'+(item.margen||'')+'" data-ins="'+cat.key+'" data-id="'+item.id+'" data-field="margen" placeholder="0%"></td>';
+      html += '<td><input class="ins-in ins-num ins-precio" value="'+(item.precio||precioCalc)+'" data-ins="'+cat.key+'" data-id="'+item.id+'" data-field="precio" placeholder="$0.00"></td>';
+      html += '<td><button class="btn bghost bsm ins-del" data-ins="'+cat.key+'" data-id="'+item.id+'">🗑</button></td>';
+      html += '</tr>';
+    });
+
+    html += '</tbody></table></div></div>';
+  });
+
+  el('insContent').innerHTML = html;
+
+  // Events for all inputs
+  el('insContent').querySelectorAll('.ins-in').forEach(function(inp){
+    inp.addEventListener('change', function(){
+      var cat = inp.dataset.ins;
+      var id = inp.dataset.id;
+      var field = inp.dataset.field;
+      var item = (insData[cat]||[]).find(function(x){return x.id===id;});
+      if(!item) return;
+      item[field] = inp.value;
+      // Auto-calc precio if costo or margen changed
+      if(field==='costo'||field==='margen'){
+        var newPrecio = calcPrecio(item.costo, item.margen);
+        if(newPrecio){
+          item.precio = newPrecio;
+          var row = document.getElementById('insr-'+id);
+          if(row){
+            var precioIn = row.querySelector('.ins-precio');
+            if(precioIn) precioIn.value = newPrecio;
+          }
+        }
+      }
+      saveINS();
+    });
+    inp.addEventListener('click', function(e){ e.stopPropagation(); });
+  });
+
+  // Delete buttons
+  el('insContent').querySelectorAll('.ins-del').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var cat = btn.dataset.ins;
+      var id = btn.dataset.id;
+      if(!confirm('¿Eliminar este producto?')) return;
+      insData[cat] = (insData[cat]||[]).filter(function(x){return x.id!==id;});
+      renderInsumos();
+      saveINS();
+    });
+  });
+
+  // Add buttons
+  cats.forEach(function(cat){
+    var addBtn = el('insadd-'+cat.key);
+    if(addBtn) addBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var newItem = {id:'i'+Date.now(),nombre:'',proveedor:'',costo:'',margen:15,precio:''};
+      if(!insData[cat.key]) insData[cat.key]=[];
+      insData[cat.key].push(newItem);
+      renderInsumos();
+      saveINS();
+      // Focus new row
+      setTimeout(function(){
+        var newRow = document.getElementById('insr-'+newItem.id);
+        if(newRow){ var inp = newRow.querySelector('.ins-in'); if(inp) inp.focus(); }
+      }, 100);
+    });
+  });
+}
+
 </script>
 </body>
 </html>
