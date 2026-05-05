@@ -252,56 +252,59 @@ var MKT = db.collection('ws').doc('marketing');
 var CTY = db.collection('ws').doc('cities');
 
 // ── CONSTANTS ──
-var STAGES = ['Prospecto','Negociación','Firma','Pre-Apertura','Abierta'];
-var STAGE_EMOJI = {Prospecto:'👀',Negociación:'🤝',Firma:'✍️','Pre-Apertura':'🏗',Abierta:'🍦'};
+var STAGES = ['Prospecto','Primera Etapa','Pre-Apertura','Cerca Apertura','Apertura'];
+var STAGE_EMOJI = {Prospecto:'👀','Primera Etapa':'🤝','Pre-Apertura':'🏗','Cerca Apertura':'⏰',Apertura:'🍦'};
 var PILL_CLS = ['sp0','sp1','sp2','sp3','sp4'];
 var HEAD_CLS = ['h0','h1','h2','h3','h4'];
 var CL = {
   'Prospecto':[
-    {id:'p1',lbl:'Primer contacto realizado'},
-    {id:'p2',lbl:'Zoom de presentación agendado'},
-    {id:'p3',lbl:'Zoom de presentación realizado'},
-    {id:'p4',lbl:'Deck de franquicias enviado'},
-    {id:'p5',lbl:'Preguntas frecuentes resueltas'}
+    {id:'p1',lbl:'Zoom de introducción agendado'},
+    {id:'p2',lbl:'NDA enviado',folio:'NDA'},
+    {id:'p3',lbl:'NDA firmado y recibido',folio:'NDA_FIRMADO'},
+    {id:'p4',lbl:'Zoom de manual de franquicias agendado'},
+    {id:'p5',lbl:'Zoom de manual de franquicias realizado'},
+    {id:'p6',lbl:'Presentación de manual de franquicia enviada'}
   ],
-  'Negociación':[
-    {id:'n1',lbl:'Reunión de negociación agendada'},
-    {id:'n2',lbl:'Reunión de negociación realizada'},
-    {id:'n3',lbl:'NDA enviado al prospecto',folio:'NDA'},
-    {id:'n4',lbl:'NDA firmado y recibido',folio:'NDA_FIRMADO'},
-    {id:'n5',lbl:'COF enviado al prospecto'},
-    {id:'n6',lbl:'COF firmado por el prospecto',folio:'COF'},
-    {id:'n7',lbl:'Pago de licencia confirmado ($350,000 MXN)'}
-  ],
-  'Firma':[
-    {id:'f1',lbl:'Contrato elaborado'},
-    {id:'f2',lbl:'Contrato enviado'},
-    {id:'f3',lbl:'Contrato firmado por ambas partes',folio:'CONTRATO'},
-    {id:'f4',lbl:'Fee de publicidad configurado ($5,000/mes)'},
-    {id:'f5',lbl:'Acceso a sistemas otorgado'}
+  'Primera Etapa':[
+    {id:'f1',lbl:'Zoom / Reunión de interés formalizado'},
+    {id:'f2',lbl:'Llenado e impresión de COF'},
+    {id:'f3',lbl:'COF enviado'},
+    {id:'f4',lbl:'COF recibido y firmado',folio:'COF'},
+    {id:'f5',lbl:'Contrato llenado e impreso'},
+    {id:'f6',lbl:'Contrato enviado'},
+    {id:'f7',lbl:'Contrato recibido y firmado',folio:'CONTRATO'},
+    {id:'f8',lbl:'Pago de licencia ($350,000 MXN) recibido'}
   ],
   'Pre-Apertura':[
-    {id:'a1',lbl:'Manual de pre-apertura enviado',folio:'PREAPERTURA'},
-    {id:'a2',lbl:'Manual de reclutamiento enviado',folio:'RECLUTAMIENTO'},
-    {id:'a3',lbl:'Manual operativo de colaboradores enviado',folio:'OPERATIVO'},
-    {id:'a4',lbl:'Manual administrativo de colaboradores enviado',folio:'ADMINISTRATIVO'},
-    {id:'a5',lbl:'Capacitación en matriz (Monterrey) agendada'},
-    {id:'a6',lbl:'Capacitación en matriz realizada'},
-    {id:'a7',lbl:'Local seleccionado y aprobado'},
-    {id:'a8',lbl:'Adecuación del local iniciada'},
-    {id:'a9',lbl:'Equipo y maquinaria adquirido'},
-    {id:'a10',lbl:'Protección Civil tramitada'},
-    {id:'a11',lbl:'Personal contratado y capacitado'},
-    {id:'a12',lbl:'Materia prima inicial pedida'},
-    {id:'a13',lbl:'Fecha de apertura definida'}
+    {id:'a1',lbl:'Llenado e impresión de manual de pre-apertura',folio:'PREAPERTURA'},
+    {id:'a2',lbl:'Reclutamiento y selección de personal',folio:'RECLUTAMIENTO'},
+    {id:'a3',lbl:'Documento de compras generado'},
+    {id:'a4',lbl:'Manuales y documentos enviados'},
+    {id:'a5',lbl:'Local seleccionado y aprobado'},
+    {id:'a6',lbl:'Equipo y maquinaria adquirido'},
+    {id:'a7',lbl:'Adecuación del local iniciada'}
   ],
-  'Abierta':[
-    {id:'o1',lbl:'Apertura oficial realizada'},
-    {id:'o2',lbl:'Staff de Scoop en inauguración'},
-    {id:'o3',lbl:'Redes sociales activadas'},
-    {id:'o4',lbl:'Primera regalía cobrada (6%)'},
-    {id:'o5',lbl:'Primera revisión de operación'},
-    {id:'o6',lbl:'Reporte mensual enviado'}
+  'Cerca Apertura':[
+    {id:'c1',lbl:'Llenado e impresión de manual de lavado de máquinas'},
+    {id:'c2',lbl:'Manual operativo llenado e impreso',folio:'OPERATIVO'},
+    {id:'c3',lbl:'Manual administrativo llenado e impreso',folio:'ADMINISTRATIVO'},
+    {id:'c4',lbl:'Capacitación en matriz (Monterrey) agendada'},
+    {id:'c5',lbl:'Capacitación en matriz (Monterrey) realizada'},
+    {id:'c6',lbl:'Protección Civil tramitada'},
+    {id:'c7',lbl:'Personal contratado'},
+    {id:'c8',lbl:'Capacitación WANSOFT realizada'},
+    {id:'c9',lbl:'Capacitación TAYLOR realizada'},
+    {id:'c10',lbl:'Materia prima pedida'},
+    {id:'c11',lbl:'Servicios de luz y agua instalados'}
+  ],
+  'Apertura':[
+    {id:'o1',lbl:'Capacitación en sucursal notificada y agendada (2-3 semanas antes)'},
+    {id:'o2',lbl:'Manuales operativo, administrativo y lavado de máquina enviados',folio:'MANUALES'},
+    {id:'o3',lbl:'Materia prima y empaques recibidos'},
+    {id:'o4',lbl:'Apertura oficial realizada'},
+    {id:'o5',lbl:'Primera regalía cobrada (6%)'},
+    {id:'o6',lbl:'Primera revisión de operación'},
+    {id:'o7',lbl:'Redes sociales activadas'}
   ]
 };
 
