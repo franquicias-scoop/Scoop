@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<head> 
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Scoop Workspace</title>
@@ -529,7 +529,7 @@ function renderSidebar(){
       if(cities.indexOf(n.trim())<0){cities.push(n.trim());saveCTY();renderSidebar();updateCityDrop();}
       else alert('Ya existe.');
     });
-  } else {
+  } else if(currentTab==='mkt'){
     var h2='<div class="slbl">Periodos</div>';
     mktData.periods.forEach(function(p,i){ h2+='<div class="si'+(mktPeriod===p?' on':'')+'" id="mp'+i+'">📅 '+p+'</div>'; });
     h2+='<div class="si" id="mpadd">+ Periodo</div><div class="sdivider"></div><div class="slbl">Categorías</div>';
@@ -541,6 +541,27 @@ function renderSidebar(){
       if(!n||!n.trim())return;
       if(mktData.periods.indexOf(n.trim())<0)mktData.periods.push(n.trim());
       mktPeriod=n.trim();renderMkt();renderSidebar();saveMKT();
+    });
+  } else if(currentTab==='ins'){
+    var h3='<div class="slbl">Categorías</div>';
+    var insCats=[
+      {key:'empaques',label:'📦 Empaques'},
+      {key:'bases',label:'🍦 Bases'},
+      {key:'toppings',label:'🍓 Toppings'},
+      {key:'uniformes',label:'👕 Uniformes'},
+      {key:'bebidas',label:'🥤 Bebidas'},
+      {key:'pastas',label:'🍫 Pastas'}
+    ];
+    insCats.forEach(function(cat,i){
+      h3+='<div class="si" id="inscat'+i+'">'+cat.label+'</div>';
+    });
+    sb.innerHTML=h3;
+    insCats.forEach(function(cat,i){
+      var e2=el('inscat'+i);
+      if(e2) e2.addEventListener('click',function(){
+        var sec=document.getElementById('ins-'+cat.key);
+        if(sec) sec.scrollIntoView({behavior:'smooth',block:'start'});
+      });
     });
   }
 }
